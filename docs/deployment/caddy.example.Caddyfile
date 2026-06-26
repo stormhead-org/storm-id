@@ -1,0 +1,14 @@
+# Caddy reverse proxy for STORM ID
+# Caddy handles SSL automatically via Let's Encrypt
+
+id.yourdomain.com {
+    # Automatic HTTPS via Let's Encrypt
+    # tls internal  <- uncomment for self-signed certs (dev)
+
+    reverse_proxy localhost:4455 {
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-Host {host}
+    }
+
+    header Strict-Transport-Security "max-age=63072000"
+}

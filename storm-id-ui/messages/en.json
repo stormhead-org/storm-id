@@ -1,0 +1,904 @@
+{
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "secondFactorTitle": "Second factor authentication",
+      "enterTotpCode": "Enter the code from your authenticator app",
+      "enterRecoveryCode": "Enter one of your backup recovery codes",
+      "useRecoveryCode": "Use a recovery code instead",
+      "backToAuthenticator": "Back to authenticator app",
+      "noMfaConfigured": "No second factor configured. Please set up two-factor authentication in your profile settings.",
+      "goToProfileSettings": "Go to Profile Settings",
+      "forgotPassword": "Forgot password?"
+    },
+    "registration": {
+      "title": "Create your account",
+      "subtitle": "Enter your details to get started",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "recovery": {
+      "title": "Recover your account",
+      "subtitle": "We'll send you a recovery link",
+      "rememberPassword": "Remember your password?"
+    },
+    "verification": {
+      "title": "Verify your email",
+      "subtitle": "Check your email for a verification link",
+      "alreadyVerified": "Already verified?"
+    },
+    "methods": {
+      "password": "Password",
+      "oidc": "Social Sign In",
+      "totp": "Authenticator App",
+      "lookup_secret": "Recovery Code",
+      "webauthn": "Security Key",
+      "passkey": "Passkey",
+      "link": "Recovery Link",
+      "code": "Verification Code"
+    },
+    "errors": {
+      "flowFailed": "Failed to create flow",
+      "flowNotInitialized": "Flow not initialized",
+      "genericError": "An error occurred",
+      "networkError": "Network error",
+      "loading": "Loading...",
+      "submitting": "Submitting..."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account settings",
+    "password": {
+      "title": "Change Password",
+      "description": "Modify your password"
+    },
+    "profile": {
+      "title": "Profile Settings",
+      "description": "Update your profile information"
+    },
+    "totp": {
+      "title": "Authenticator App",
+      "description": "Add a TOTP Authenticator App to your account to improve your account security",
+      "enabledLabel": "Authenticator app",
+      "enabledDesc": "Two-factor authentication is enabled",
+      "remove2fa": "Remove 2FA"
+    },
+    "lookup_secret": {
+      "title": "Backup Recovery Codes",
+      "description": "Recovery codes are a secure backup for 2FA without your TOTP app"
+    },
+    "oidc": {
+      "title": "Connected Accounts",
+      "description": "Connect a social login provider with your account",
+      "unlink": "Unlink"
+    },
+    "passkey": {
+      "title": "Manage Passkeys",
+      "description": "Manage your passkey settings",
+      "remove": "Remove"
+    },
+    "webauthn": {
+      "title": "Manage Hardware Tokens",
+      "description": "Manage your hardware token settings",
+      "remove": "Remove"
+    }
+  },
+  "error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again.",
+    "backToLogin": "Back to Login"
+  },
+  "roles": {
+    "list": {
+      "title": "Roles",
+      "description": "Use roles to create groups with members and configure their permissions.",
+      "search": "Search role...",
+      "newRole": "New Role",
+      "rolesCount": "Roles — {count}",
+      "notFound": "Role not found",
+      "ownerDescription": "Full access to all functions",
+      "everyoneDescription": "Default permissions for all members"
+    },
+    "editor": {
+      "back": "Back",
+      "editRole": "Edit role — {name}",
+      "selectRole": "Select a role to edit",
+      "loading": "Loading...",
+      "visual": "Appearance",
+      "permissions": "Permissions",
+      "members": "Members",
+      "ownerPermissionsLocked": "System role @owner permissions cannot be changed.",
+      "permissionsNotFound": "Permissions not found...",
+      "permissionsSearch": "Search permissions...",
+      "newRole": "New Role",
+      "deleteDialog": {
+        "title": "Delete Role",
+        "description": "Are you sure you want to delete {name}? This action cannot be undone.",
+        "cancel": "Cancel",
+        "deleting": "Deleting...",
+        "delete": "Delete"
+      }
+    },
+    "visual": {
+      "nameLabel": "Role Name",
+      "namePlaceholder": "Role name",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Role description (optional)",
+      "colorLabel": "Role Color",
+      "resetColor": "Reset color",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "badge": {
+      "system": "System",
+      "default": "Default"
+    },
+    "users": {
+      "title": "Members with role — {name}",
+      "search": "Search members...",
+      "add": "Add",
+      "notFound": "No members found"
+    },
+    "addUser": {
+      "title": "Add Members",
+      "description": "Select users to add to this role",
+      "search": "Search users...",
+      "notFound": "No users found",
+      "cancel": "Cancel",
+      "add": "Add ({n})"
+    },
+    "page": {
+      "title": "Manage Roles",
+      "description": "Create and manage roles, configure permissions"
+    }
+  },
+  "sidebar": {
+    "administration": "Administration",
+    "overview": "Overview",
+    "sessionInfo": "Sessions",
+    "myApplications": "My Applications",
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "manageUsers": "Manage Users",
+    "messages": "Messages",
+    "platformApps": "Platform Apps",
+    "manageRoles": "Manage Roles",
+    "tokenInspector": "Token Inspector"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "System analytics and metrics overview",
+    "refresh": "Refresh",
+    "error": "Failed to load analytics",
+    "retry": "Retry",
+    "hydraUnavailable": "Hydra service is unavailable. Some features may not work correctly.",
+    "stats": {
+      "totalUsers": "Total Users",
+      "activeSessions": "Active Sessions",
+      "emailVerification": "Email Verification Rate",
+      "oauthClients": "OAuth2 Clients",
+      "avgSession": "Avg Session Duration",
+      "schemas": "Identity Schemas",
+      "kratosHealth": "Kratos Health",
+      "hydraHealth": "Hydra Health",
+      "grantTypes": "Grant Types",
+      "newUsers30d": "+{n} in 30 days",
+      "sessions7d": "{n} in 7 days",
+      "clientTypes": "{public} public, {confidential} confidential"
+    },
+    "health": {
+      "ok": "OK",
+      "down": "DOWN"
+    },
+    "charts": {
+      "newUsers": "New User Registrations (30d)",
+      "usersBySchema": "Users by Schema",
+      "sessionActivity": "Session Activity (7d)",
+      "clientTypes": "OAuth2 Client Types",
+      "emailVerification": "Email Verification",
+      "grantTypes": "Grant Types Distribution"
+    },
+    "empty": {
+      "noClients": "No clients registered",
+      "noClientsHint": "Register OAuth2 clients via Hydra CLI or storm-id UI to see type distribution",
+      "noGrants": "Grant type data appears once OAuth2 clients are registered with defined grant flows"
+    }
+  },
+  "identities": {
+    "page": {
+      "title": "Manage Users",
+      "description": "View and manage registered users"
+    },
+    "table": {
+      "failedToLoad": "Failed to load users",
+      "retry": "Retry",
+      "search": "Search users...",
+      "count": "{n} users",
+      "newUser": "New User",
+      "selected": "{n} selected",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "delete": "Delete",
+      "noResults": "No users match your search",
+      "noUsers": "No users found",
+      "columns": {
+        "name": "Name",
+        "email": "Email",
+        "status": "Status",
+        "verified": "Verified",
+        "schema": "Schema",
+        "created": "Created",
+        "updated": "Updated"
+      },
+      "badges": {
+        "verified": "Verified",
+        "unverified": "Unverified"
+      },
+      "bulk": {
+        "deleteUsers": "Delete Users",
+        "activateUsers": "Activate Users",
+        "deactivateUsers": "Deactivate Users",
+        "description": "{label} — {n} user(s)",
+        "succeeded": "{n} succeeded",
+        "succeededWith": "{n} succeeded, {failed} failed",
+        "cancel": "Cancel",
+        "start": "Start",
+        "close": "Close",
+        "processing": "Processing..."
+      }
+    },
+    "detail": {
+      "failedToLoad": "Failed to load user",
+      "retry": "Retry",
+      "unknownName": "Unnamed User",
+      "edit": "Edit",
+      "recover": "Recover",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "delete": "Delete",
+      "identityId": "Identity ID",
+      "state": "State",
+      "schema": "Schema",
+      "created": "Created",
+      "updated": "Updated",
+      "email": "Email",
+      "name": "Name",
+      "via": "via {via}",
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "noVerifiable": "No verifiable addresses",
+      "publicMetadata": "Public Metadata",
+      "adminMetadata": "Admin Metadata",
+      "sessions": "Sessions",
+      "active": "Active",
+      "inactive": "Inactive",
+      "moreSessions": "+{n} more sessions",
+      "noSessions": "No sessions found",
+      "deleteAllSessions": "Delete All Sessions",
+      "deleteUser": "Delete User",
+      "deleteUserConfirm": "Are you sure you want to delete this user? This action cannot be undone.",
+      "deleteAllSessionsConfirm": "Are you sure you want to delete all sessions for this user?",
+      "cancel": "Cancel",
+      "deleting": "Deleting...",
+      "editUser": "Edit User",
+      "editUserDesc": "Update user profile information",
+      "deactivateUser": "Deactivate User",
+      "deactivateUserDesc": "This will prevent the user from logging in.",
+      "activateUser": "Activate User",
+      "activateUserDesc": "This will restore the user's ability to log in.",
+      "recoveryCode": "Recovery Code",
+      "recoveryCodeGenerated": "Recovery Code Generated",
+      "recoveryLink": "Recovery Link",
+      "recoveryLinkConfirm": "Send a recovery link to {email}?",
+      "expiresAt": "Expires at {date}",
+      "close": "Close",
+      "sendRecoveryLink": "Send Recovery Link",
+      "sending": "Sending...",
+      "save": "Save",
+      "saving": "Saving...",
+      "nameField": "Name",
+      "emailField": "Email",
+      "deleteAllSessionsAction": "Delete All Sessions"
+    },
+    "create": {
+      "title": "Create User",
+      "description": "Register a new user account",
+      "noAccess": "You don't have permission to create users.",
+      "success": "User Created",
+      "successDesc": "User {name} has been created successfully.",
+      "viewUser": "View User",
+      "backToUsers": "Back to Users",
+      "userInfo": "User Information",
+      "displayName": "Display Name",
+      "displayNamePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "john@example.com",
+      "password": "Initial Password",
+      "passwordPlaceholder": "Leave empty to send invite",
+      "passwordHint": "Optionally set an initial password. Leave blank to require passwordless setup.",
+      "cancel": "Cancel",
+      "createUser": "Create User"
+    }
+  },
+  "sessions": {
+    "page": {
+      "title": "Session Info",
+      "description": "View your active sessions and devices"
+    },
+    "table": {
+      "expired": "Expired",
+      "remaining": "{n}d {n}h remaining",
+      "remainingHours": "{n}h {n}m remaining",
+      "remainingMinutes": "{n}m remaining",
+      "unknown": "Unknown",
+      "failedToLoad": "Failed to load sessions",
+      "retry": "Retry",
+      "count": "{n} session(s)",
+      "refresh": "Refresh",
+      "noSessions": "No sessions found",
+      "columns": {
+        "identity": "Identity",
+        "status": "Status",
+        "aal": "AAL",
+        "authenticated": "Authenticated",
+        "expires": "Expires"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      }
+    },
+    "detail": {
+      "expired": "Expired",
+      "remaining": "{n}d {n}h remaining",
+      "remainingHours": "{n}h {n}m remaining",
+      "remainingMinutes": "{n}m remaining",
+      "unknown": "Unknown",
+      "methods": {
+        "password": "Password",
+        "totp": "TOTP",
+        "passkey": "Passkey",
+        "magicLink": "Magic Link",
+        "recoveryCode": "Recovery Code",
+        "oidc": "OIDC"
+      },
+      "failedToLoad": "Failed to load session",
+      "retry": "Retry",
+      "failedToRevoke": "Failed to revoke session",
+      "failedToExtend": "Failed to extend session",
+      "title": "Session Details",
+      "sessionId": "Session ID",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "aal": "Assurance Level",
+      "authenticatedAt": "Authenticated At",
+      "issuedAt": "Issued At",
+      "expiresAt": "Expires At",
+      "authenticationMethods": "Authentication Methods",
+      "identityId": "Identity ID",
+      "displayName": "Display Name",
+      "state": "State",
+      "schemaId": "Schema ID",
+      "identityTraits": "Identity Traits",
+      "methodsUsed": "{n} method(s) used",
+      "devicesRegistered": "{n} device(s) registered",
+      "actions": "Actions",
+      "revoke": "Revoke Session",
+      "revoking": "Revoking...",
+      "extend": "Extend Session",
+      "extending": "Extending...",
+      "backToSessions": "Back to Sessions"
+    }
+  },
+  "clients": {
+    "page": {
+      "title": "My Applications",
+      "description": "Manage your OAuth2 applications and API clients"
+    },
+    "create": {
+      "pageTitle": "Create Application",
+      "pageDescription": "Register a new OAuth2 application",
+      "noAccess": "You don't have permission to create applications."
+    },
+    "edit": {
+      "pageTitle": "Edit Application",
+      "noAccess": "You don't have permission to edit applications."
+    },
+    "list": {
+      "failedToLoad": "Failed to load applications",
+      "retry": "Retry",
+      "total": "Total Applications",
+      "public": "Public (PKCE)",
+      "confidential": "Confidential",
+      "authCodeFlow": "Auth Code Flow",
+      "search": "Search applications...",
+      "newApp": "New Application",
+      "noResults": "No applications match your search",
+      "noApps": "No applications yet",
+      "createFirst": "Create your first application",
+      "columns": {
+        "name": "Name",
+        "clientId": "Client ID",
+        "type": "Type",
+        "grantTypes": "Grant Types",
+        "scopes": "Scopes",
+        "created": "Created"
+      },
+      "unnamed": "Unnamed",
+      "typePublic": "Public",
+      "typeConfidential": "Confidential",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteDialog": {
+        "title": "Delete Application",
+        "description": "Are you sure you want to delete this application? This action cannot be undone.",
+        "cancel": "Cancel",
+        "deleting": "Deleting...",
+        "delete": "Delete"
+      }
+    },
+    "detail": {
+      "failedToLoad": "Failed to load application",
+      "retry": "Retry",
+      "unnamed": "Unnamed Application",
+      "edit": "Edit",
+      "delete": "Delete",
+      "basicInfo": "Basic Info",
+      "type": "Type",
+      "authMethod": "Auth Method",
+      "subjectType": "Subject Type",
+      "owner": "Owner",
+      "clientCredentials": "Client Credentials",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "newSecret": "New Client Secret",
+      "regenerating": "Regenerating...",
+      "regenerateSecret": "Regenerate Secret",
+      "oauth2Config": "OAuth2 Configuration",
+      "grantTypes": "Grant Types",
+      "none": "None",
+      "responseTypes": "Response Types",
+      "scopes": "Scopes",
+      "redirectUris": "Redirect URIs",
+      "noRedirectUris": "No redirect URIs configured",
+      "clientUri": "Client URI",
+      "logoUri": "Logo URI",
+      "advanced": "Advanced Settings",
+      "subjectType2": "Subject Type",
+      "authMethod2": "Auth Method",
+      "userinfoJwsAlg": "Userinfo JWS Alg",
+      "backchannelLogoutUri": "Backchannel Logout URI",
+      "metadata": "Metadata",
+      "created": "Created",
+      "updated": "Updated",
+      "secretExpires": "Secret Expires",
+      "customMetadata": "Custom Metadata",
+      "deleteDialog": {
+        "title": "Delete Application",
+        "description": "Are you sure you want to delete this application? This action cannot be undone.",
+        "cancel": "Cancel",
+        "deleting": "Deleting...",
+        "delete": "Delete"
+      }
+    },
+    "form": {
+      "success": "Application Created",
+      "successDesc": "Your application has been created successfully.",
+      "clientId": "Client ID",
+      "copied": "Copied!",
+      "clientSecret": "Client Secret",
+      "secretWarning": "Make sure to copy your client secret now. You won't be able to see it again.",
+      "type": "Application Type",
+      "typePublic": "Public (PKCE)",
+      "typeConfidential": "Confidential",
+      "viewApp": "View Application",
+      "backToApps": "Back to Applications",
+      "basicInfo": "Basic Information",
+      "appName": "Application Name",
+      "appNamePlaceholder": "My App",
+      "publicHint": "Public client (PKCE) — no client_secret required",
+      "redirectUris": "Redirect URIs",
+      "redirectUriPlaceholder": "https://example.com/callback",
+      "oauth2Config": "OAuth2 Configuration",
+      "grantTypes": "Grant Types",
+      "responseTypes": "Response Types",
+      "scopes": "Scopes",
+      "scopesPlaceholder": "openid profile email",
+      "scopesHint": "Space-separated list of scopes",
+      "cancel": "Cancel",
+      "saveChanges": "Save Changes",
+      "createApp": "Create Application"
+    }
+  },
+  "messages": {
+    "page": {
+      "title": "Messages",
+      "description": "Monitor outgoing email and notification messages"
+    },
+    "table": {
+      "statuses": {
+        "all": "All Status",
+        "queued": "Queued",
+        "sent": "Sent",
+        "failed": "Failed",
+        "processing": "Processing",
+        "abandoned": "Abandoned"
+      },
+      "failedToLoad": "Failed to load messages",
+      "retry": "Retry",
+      "search": "Search by recipient, subject, ID, template...",
+      "clearFilters": "Clear Filters",
+      "noResults": "No messages match your search",
+      "noMessages": "No messages found",
+      "columns": {
+        "type": "Type",
+        "status": "Status",
+        "recipient": "Recipient",
+        "subject": "Subject",
+        "template": "Template",
+        "sendCount": "Send Count",
+        "created": "Created"
+      },
+      "unknown": "Unknown",
+      "loadMore": "Load More Messages",
+      "showing": "Showing {n} message(s) (more available)"
+    },
+    "detail": {
+      "failedToLoad": "Failed to load message",
+      "retry": "Retry",
+      "backToMessages": "Back to Messages",
+      "title": "Message Details",
+      "noSubject": "No subject",
+      "generalInfo": "General Information",
+      "messageId": "Message ID",
+      "status": "Status",
+      "type": "Type",
+      "channel": "Channel",
+      "defaultChannel": "Default",
+      "timing": "Timing",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "templateType": "Template Type",
+      "sendCount": "Send Count",
+      "recipient": "Recipient",
+      "subject": "Subject",
+      "content": "Message Content",
+      "deliveryAttempts": "Delivery Attempts ({n})",
+      "dispatchId": "Dispatch ID",
+      "created": "Created",
+      "updated": "Updated",
+      "template": "Template"
+    }
+  },
+  "profile": {
+    "tabs": {
+      "general": "General",
+      "security": "Security"
+    },
+    "general": {
+      "title": "Profile Information",
+      "description": "Update your profile details",
+      "loading": "Loading settings...",
+      "failedToLoad": "Failed to load settings: {error}",
+      "unableToLoad": "Unable to load profile settings.",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes",
+      "fields": {
+        "traits": {
+          "email": "Email",
+          "name": "Name"
+        }
+      }
+    },
+    "security": {
+      "title": "Security",
+      "description": "Manage your account security settings",
+      "fields": {
+        "password": "New Password",
+        "confirmPassword": "Confirm New Password",
+        "passwordMismatch": "Passwords do not match",
+        "traits.email": "Email",
+        "traits.name": "Name"
+      },
+      "changePassword": {
+        "title": "Change Password",
+        "description": "Update your account password"
+      },
+      "totp": {
+        "title": "2FA Authenticator App",
+        "description": "Manage two-factor authentication via authenticator app"
+      },
+      "twoFactor": {
+        "title": "Two-Factor Authentication",
+        "description": "Secure your account with an authenticator app and backup recovery codes",
+        "enabled": "Two-factor authentication is enabled.",
+        "enabledDescription": "Your account is protected with an authenticator app and backup recovery codes.",
+        "enable": "Enable 2FA",
+        "remove": "Remove 2FA",
+        "removeFailed": "Failed to remove two-factor authentication",
+        "removing": "Removing 2FA...",
+        "regenerateCodes": "Generate New Codes",
+        "generatingCodes": "Generating backup recovery codes...",
+        "generateFailed": "Failed to generate recovery codes",
+        "confirmFailed": "Failed to confirm recovery codes",
+        "saveCodesHint": "Save these backup recovery codes in a safe place. You can use them to access your account if you lose your device.",
+        "copyCodes": "Copy Codes",
+        "cancel": "Cancel",
+        "confirming": "Confirming...",
+        "confirmSave": "I've Saved My Codes",
+        "unavailable": "Two-factor authentication is currently unavailable.",
+        "noPassword": "No password settings available."
+      },
+      "recoveryCodes": {
+        "title": "Backup Recovery Codes",
+        "description": "Generate and manage 2FA backup codes"
+      },
+      "saving": "Saving...",
+      "save": "Save"
+    },
+    "reauth": {
+      "title": "Additional Authentication Required",
+      "description": "Please re-authenticate to continue with this sensitive action.",
+      "cancel": "Cancel",
+      "continue": "Continue to Authentication"
+    }
+  },
+  "tokens": {
+    "page": {
+      "title": "Token Management",
+      "description": "Introspect and revoke OAuth2 access tokens"
+    },
+    "detail": {
+      "title": "Token Details",
+      "description": "Detailed information about the introspected token",
+      "tokenStatus": "Token is {active, select, true {Active} other {Inactive}} • Expires in {time}",
+      "basicInfo": "Basic Information",
+      "subject": "Subject",
+      "clientId": "Client ID",
+      "tokenType": "Token Type",
+      "issuer": "Issuer",
+      "username": "Username",
+      "timestamps": "Timestamps",
+      "issuedAt": "Issued At (iat)",
+      "expiresAt": "Expires At (exp)",
+      "notBefore": "Not Before (nbf)",
+      "scopes": "Scopes & Audience",
+      "audience": "Audience",
+      "rawData": "Raw Data",
+      "close": "Close",
+      "expired": "Expired",
+      "backToList": "← Back to Tokens"
+    },
+    "introspect": {
+      "total": "Total Introspected",
+      "active": "Active",
+      "expiredInactive": "Expired/Inactive",
+      "expiring24h": "Expiring in 24h",
+      "title": "Introspect Token",
+      "tokenList": "Token List",
+      "clearAll": "Clear All",
+      "accessToken": "Access Token",
+      "scope": "Scope (Optional)",
+      "scopePlaceholder": "openid profile",
+      "introspect": "Introspect Token",
+      "clear": "Clear",
+      "failed": "Failed to introspect token"
+    },
+    "table": {
+      "columns": {
+        "token": "Token",
+        "status": "Status",
+        "clientId": "Client ID",
+        "scopes": "Scopes",
+        "subject": "Subject",
+        "expires": "Expires"
+      },
+      "status": {
+        "active": "Active",
+        "expired": "Expired",
+        "inactive": "Inactive"
+      }
+    },
+    "noTokens": "No tokens introspected yet",
+    "noTokensHint": "Use the \"Introspect Token\" tab to analyze OAuth2 tokens",
+    "revoke": {
+      "title": "Revoke Token",
+      "description": "Are you sure you want to revoke this token?",
+      "cancel": "Cancel",
+      "revoking": "Revoking...",
+      "revoke": "Revoke Token"
+    }
+  },
+  "adminApps": {
+    "page": {
+      "title": "Platform Applications",
+      "description": "View all registered OAuth2 applications"
+    },
+    "table": {
+      "failedToLoad": "Failed to load platform applications",
+      "retry": "Retry",
+      "total": "Total Applications",
+      "typePublic": "Public (PKCE)",
+      "typeConfidential": "Confidential",
+      "search": "Search applications...",
+      "newApp": "New Application",
+      "noResults": "No applications match your search",
+      "noApps": "No applications registered",
+      "columns": {
+        "name": "Name",
+        "clientId": "Client ID",
+        "type": "Type",
+        "owner": "Owner"
+      },
+      "unnamed": "Unnamed",
+      "public": "Public",
+      "confidential": "Confidential",
+      "deleteDialog": {
+        "title": "Delete Application",
+        "description": "Are you sure you want to delete this application? This action cannot be undone.",
+        "cancel": "Cancel",
+        "deleting": "Deleting...",
+        "delete": "Delete"
+      }
+    }
+  },
+  "consent": {
+    "scopes": {
+      "openid": "Authenticate using OpenID Connect",
+      "profile": "View your profile information",
+      "email": "View your email address",
+      "offlineAccess": "Offline access (refresh token)"
+    },
+    "title": "Authenticate using OpenID Connect",
+    "appName": "STORM ID",
+    "requesting": "{name} is requesting access to your account",
+    "permissions": "Requested permissions",
+    "audience": "Audience",
+    "deny": "Deny",
+    "processing": "Processing...",
+    "accept": "Accept"
+  },
+  "welcome": {
+    "sessionInfo": "Session Info",
+    "sessionInfoDesc": "View your active sessions and devices",
+    "myApplications": "My Applications",
+    "myApplicationsDesc": "Manage your OAuth2 applications",
+    "profile": "Profile",
+    "profileDesc": "Update your account settings and security",
+    "manageRoles": "Manage Roles",
+    "manageRolesDesc": "Configure roles and permissions",
+    "dashboard": "Dashboard",
+    "dashboardDesc": "View system analytics and metrics",
+    "greeting": "Welcome, {name}!",
+    "signedInAs": "Signed in as {email}",
+    "subtitle": "Manage your account and applications"
+  },
+  "header": {
+    "logout": "Logout",
+    "user": "User"
+  },
+  "common": {
+    "noAccess": "You don't have access to this page.",
+    "language": "Language",
+    "loading": "Loading...",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "save": "Save",
+    "deleting": "Deleting...",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "landing": {
+    "hero": {
+      "title": "STORM ID",
+      "subtitle": "Single identity for all STORMHEAD products",
+      "join": "Join"
+    },
+    "features": {
+      "title": "What is STORM ID",
+      "subtitle": "Identity provider powering the STORMHEAD ecosystem",
+      "sso": {
+        "title": "Single Sign-On",
+        "desc": "One account for every STORMHEAD product. No repeated logins."
+      },
+      "security": {
+        "title": "Security",
+        "desc": "Two-factor authentication, TOTP, backup recovery codes"
+      },
+      "enterprise": {
+        "title": "Enterprise-grade Identity",
+        "desc": "Powered by Ory, self-hosted on our infrastructure. The same open-source identity stack trusted by OpenAI."
+      }
+    },
+    "capabilities": {
+      "title": "Platform Capabilities",
+      "oauth2": {
+        "title": "OAuth2 Clients",
+        "desc": "Register applications with PKCE support, manage redirect URIs and scopes"
+      },
+      "twofa": {
+        "title": "2FA Protection",
+        "desc": "TOTP authenticator apps, backup recovery codes, AAL2 session upgrade"
+      },
+      "sessions": {
+        "title": "Sessions & Devices",
+        "desc": "View active sessions, revoke access, monitor authentication methods"
+      }
+    },
+    "developers": {
+      "title": "For Developers",
+      "desc": "Connect your application to STORM ID",
+      "hint": "OAuth2, OpenID Connect, PKCE, REST API"
+    },
+    "footer": {
+      "copyright": "© 2026 STORMHEAD. All rights reserved."
+    }
+  },
+  "toasts": {
+    "success": {
+      "roleCreated": "Role «{name}» created",
+      "roleUpdated": "Role saved",
+      "roleDeleted": "Role deleted",
+      "rolesReordered": "Roles reordered",
+      "identityCreated": "User created",
+      "identityUpdated": "User saved",
+      "identityDeleted": "User deleted",
+      "identitiesBulkDeleted": "{count} users deleted",
+      "identitiesBulkActivated": "{count} users activated",
+      "identitiesBulkDeactivated": "{count} users deactivated",
+      "identitySessionsRevoked": "All sessions revoked",
+      "clientCreated": "Application created",
+      "clientUpdated": "Application saved",
+      "clientDeleted": "Application deleted",
+      "sessionRevoked": "Session revoked",
+      "sessionExtended": "Session extended",
+      "tokenRevoked": "Token revoked",
+      "profileSaved": "Profile saved",
+      "passwordChanged": "Password changed",
+      "twoFactorEnabled": "2FA enabled",
+      "twoFactorRemoved": "2FA removed",
+      "lookupGenerated": "Backup codes generated",
+      "lookupConfirmed": "Backup codes saved",
+      "recoverySent": "Recovery link sent",
+      "secretRegenerated": "Client secret regenerated"
+    },
+    "error": {
+      "generic": "Something went wrong",
+      "roleCreateFailed": "Failed to create role",
+      "roleDeleteFailed": "Failed to delete role",
+      "roleUpdateFailed": "Failed to save role",
+      "rolesReorderFailed": "Failed to reorder roles",
+      "identityCreateFailed": "Failed to create user",
+      "identityDeleteFailed": "Failed to delete user",
+      "identityUpdateFailed": "Failed to save user",
+      "identitySessionsRevokeFailed": "Failed to revoke sessions",
+      "identityStateFailed": "Failed to change user state",
+      "identityRecoverFailed": "Failed to send recovery link",
+      "clientCreateFailed": "Failed to create application",
+      "clientDeleteFailed": "Failed to delete application",
+      "clientUpdateFailed": "Failed to save application",
+      "sessionRevokeFailed": "Failed to revoke session",
+      "sessionExtendFailed": "Failed to extend session",
+      "tokenRevokeFailed": "Failed to revoke token",
+      "tokenIntrospectFailed": "Failed to introspect token",
+      "tokenInactive": "Token is inactive or expired",
+      "profileSaveFailed": "Failed to save profile",
+      "passwordChangeFailed": "Failed to change password",
+      "twoFactorRemoveFailed": "Failed to remove 2FA",
+      "lookupGenerateFailed": "Failed to generate backup codes",
+      "lookupConfirmFailed": "Failed to confirm backup codes",
+      "regenerateSecretFailed": "Failed to regenerate secret",
+      "authFailed": "Authentication failed",
+      "flowFailed": "Failed to load authentication form",
+      "roleAssignFailed": "Failed to assign role",
+      "roleUnassignFailed": "Failed to unassign role"
+    }
+  }
+}

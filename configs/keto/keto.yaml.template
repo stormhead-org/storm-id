@@ -1,0 +1,26 @@
+dsn: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${KETO_DB}?sslmode=disable
+
+serve:
+  read:
+    port: 4466
+    host: 0.0.0.0
+    cors:
+      enabled: true
+      allowed_origins: ["__PUBLIC_URL__"]
+      allowed_methods: [GET, POST]
+      allowed_headers: [Content-Type]
+  write:
+    port: 4467
+    host: 0.0.0.0
+    cors:
+      enabled: true
+      allowed_origins: ["__PUBLIC_URL__"]
+      allowed_methods: [PUT, DELETE, PATCH]
+      allowed_headers: [Content-Type]
+
+namespaces:
+  location: file:///etc/keto/keto_namespaces.ts
+
+log:
+  level: info
+  format: json

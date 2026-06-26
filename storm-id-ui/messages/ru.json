@@ -1,0 +1,902 @@
+{
+  "auth": {
+    "login": {
+      "title": "С возвращением",
+      "subtitle": "Войдите в свой аккаунт",
+      "noAccount": "Нет аккаунта?",
+      "signUp": "Зарегистрироваться",
+      "secondFactorTitle": "Двухфакторная аутентификация",
+      "enterTotpCode": "Введите код из приложения-аутентификатора",
+      "enterRecoveryCode": "Введите один из резервных кодов",
+      "useRecoveryCode": "Использовать код восстановления",
+      "backToAuthenticator": "Вернуться к приложению-аутентификатору",
+      "noMfaConfigured": "Второй фактор не настроен. Пожалуйста, настройте двухфакторную аутентификацию в настройках профиля.",
+      "goToProfileSettings": "Перейти к настройкам профиля",
+      "forgotPassword": "Забыли пароль?"
+    },
+    "registration": {
+      "title": "Создать аккаунт",
+      "subtitle": "Введите данные для регистрации",
+      "hasAccount": "Уже есть аккаунт?",
+      "signIn": "Войти"
+    },
+    "recovery": {
+      "title": "Восстановить аккаунт",
+      "subtitle": "Мы отправим вам ссылку для восстановления",
+      "rememberPassword": "Вспомнили пароль?"
+    },
+    "verification": {
+      "title": "Подтвердите email",
+      "subtitle": "Проверьте почту — мы отправили ссылку для подтверждения",
+      "alreadyVerified": "Уже подтверждено?"
+    },
+    "methods": {
+      "password": "Пароль",
+      "oidc": "Войти через соцсети",
+      "totp": "Приложение-аутентификатор",
+      "lookup_secret": "Код восстановления",
+      "webauthn": "Ключ безопасности",
+      "passkey": "Passkey",
+      "link": "Ссылка восстановления",
+      "code": "Код подтверждения"
+    },
+    "errors": {
+      "flowFailed": "Не удалось создать поток",
+      "flowNotInitialized": "Поток не инициализирован",
+      "genericError": "Произошла ошибка",
+      "networkError": "Ошибка сети",
+      "loading": "Загрузка...",
+      "submitting": "Отправка..."
+    }
+  },
+  "settings": {
+    "title": "Настройки",
+    "subtitle": "Управление настройками аккаунта",
+    "password": {
+      "title": "Сменить пароль",
+      "description": "Измените ваш пароль"
+    },
+    "profile": {
+      "title": "Настройки профиля",
+      "description": "Обновите информацию профиля"
+    },
+    "totp": {
+      "title": "Приложение-аутентификатор",
+      "description": "Добавьте приложение TOTP для двухфакторной аутентификации",
+      "enabledLabel": "Приложение-аутентификатор",
+      "enabledDesc": "Двухфакторная аутентификация включена",
+      "remove2fa": "Отключить 2FA"
+    },
+    "lookup_secret": {
+      "title": "Резервные коды восстановления",
+      "description": "Коды восстановления — это надёжный резервный способ входа без TOTP"
+    },
+    "oidc": {
+      "title": "Подключенные аккаунты",
+      "description": "Подключите социальные сети для входа через них",
+      "unlink": "Отвязать"
+    },
+    "passkey": {
+      "title": "Управление Passkeys",
+      "description": "Управляйте вашими Passkeys",
+      "remove": "Удалить"
+    },
+    "webauthn": {
+      "title": "Управление ключами безопасности",
+      "description": "Управляйте настройками аппаратных ключей",
+      "remove": "Удалить"
+    }
+  },
+  "error": {
+    "title": "Что-то пошло не так",
+    "description": "Произошла неожиданная ошибка. Пожалуйста, попробуйте снова.",
+    "backToLogin": "Вернуться ко входу"
+  },
+  "roles": {
+    "list": {
+      "title": "Роли",
+      "description": "Используйте роли для создания групп с участниками и настройки их прав.",
+      "search": "Поиск роли...",
+      "newRole": "Новая роль",
+      "rolesCount": "Роли — {count}",
+      "notFound": "Роль не найдена",
+      "ownerDescription": "Полный доступ ко всем функциям",
+      "everyoneDescription": "Стандартные права для всех участников"
+    },
+    "editor": {
+      "back": "Назад",
+      "editRole": "Редактировать роль — {name}",
+      "selectRole": "Выберите роль для редактирования",
+      "loading": "Загрузка...",
+      "visual": "Внешний вид",
+      "permissions": "Права доступа",
+      "members": "Участники",
+      "ownerPermissionsLocked": "Права системной роли @owner нельзя изменить.",
+      "permissionsNotFound": "Права не найдены...",
+      "permissionsSearch": "Поиск прав...",
+      "newRole": "Новая роль",
+      "deleteDialog": {
+        "title": "Удалить роль",
+        "description": "Вы уверены, что хотите удалить {name}? Это действие нельзя отменить.",
+        "cancel": "Отмена",
+        "deleting": "Удаление...",
+        "delete": "Удалить"
+      }
+    },
+    "visual": {
+      "nameLabel": "Название роли",
+      "namePlaceholder": "Название роли",
+      "descriptionLabel": "Описание",
+      "descriptionPlaceholder": "Описание роли (необязательно)",
+      "colorLabel": "Цвет роли",
+      "resetColor": "Сбросить цвет",
+      "save": "Сохранить",
+      "saving": "Сохранение..."
+    },
+    "badge": {
+      "system": "Системная",
+      "default": "По умолчанию"
+    },
+    "users": {
+      "title": "Участники с ролью — {name}",
+      "search": "Поиск участников...",
+      "add": "Добавить",
+      "notFound": "Участники не найдены"
+    },
+    "addUser": {
+      "title": "Добавить участников",
+      "description": "Выберите пользователей для добавления в роль",
+      "search": "Поиск пользователей...",
+      "notFound": "Пользователи не найдены",
+      "cancel": "Отмена",
+      "add": "Добавить ({n})"
+    },
+    "page": {
+      "title": "Управление ролями",
+      "description": "Создавайте и управляйте ролями, назначайте права доступа"
+    }
+  },
+  "sidebar": {
+    "administration": "Администрирование",
+    "overview": "Обзор",
+    "sessionInfo": "Сессии",
+    "myApplications": "Мои приложения",
+    "profile": "Профиль",
+    "dashboard": "Сводка",
+    "manageUsers": "Пользователи",
+    "messages": "Сообщения",
+    "platformApps": "Приложения",
+    "manageRoles": "Управление ролями",
+    "tokenInspector": "Инспектор токенов"
+  },
+  "dashboard": {
+    "title": "Сводка",
+    "subtitle": "Обзор системной аналитики и метрик",
+    "refresh": "Обновить",
+    "error": "Не удалось загрузить аналитику",
+    "retry": "Повторить",
+    "hydraUnavailable": "Сервис Hydra недоступен. Некоторые функции могут не работать.",
+    "stats": {
+      "totalUsers": "Всего пользователей",
+      "activeSessions": "Активные сессии",
+      "emailVerification": "Подтверждение Email",
+      "oauthClients": "OAuth2 Клиенты",
+      "avgSession": "Средняя длительность сессии",
+      "schemas": "Схемы идентичностей",
+      "kratosHealth": "Статус Kratos",
+      "hydraHealth": "Статус Hydra",
+      "grantTypes": "Типы грантов",
+      "newUsers30d": "+{n} за 30 дней",
+      "sessions7d": "{n} за 7 дней",
+      "clientTypes": "{public} публичных, {confidential} конфиденциальных"
+    },
+    "health": {
+      "ok": "Доступен",
+      "down": "Недоступен"
+    },
+    "charts": {
+      "newUsers": "Новые регистрации (30 дн.)",
+      "usersBySchema": "Пользователи по схемам",
+      "sessionActivity": "Активность сессий (7 дн.)",
+      "clientTypes": "Типы OAuth2 клиентов",
+      "emailVerification": "Подтверждение Email",
+      "grantTypes": "Распределение типов грантов"
+    },
+    "empty": {
+      "noClients": "Нет зарегистрированных клиентов",
+      "noClientsHint": "Зарегистрируйте OAuth2 клиентов через Hydra CLI или storm-id UI, чтобы увидеть распределение типов",
+      "noGrants": "Данные о типах грантов появятся после регистрации OAuth2 клиентов с настроенными потоками"
+    }
+  },
+  "identities": {
+    "page": {
+      "title": "Пользователи",
+      "description": "Просмотр и управление зарегистрированными пользователями"
+    },
+    "table": {
+      "failedToLoad": "Не удалось загрузить пользователей",
+      "retry": "Повторить",
+      "search": "Поиск пользователей...",
+      "count": "{n} пользователей",
+      "newUser": "Новый пользователь",
+      "selected": "Выбрано: {n}",
+      "activate": "Активировать",
+      "deactivate": "Деактивировать",
+      "delete": "Удалить",
+      "noResults": "Нет пользователей по вашему запросу",
+      "noUsers": "Пользователи не найдены",
+      "columns": {
+        "name": "Имя",
+        "email": "Email",
+        "status": "Статус",
+        "verified": "Подтверждён",
+        "schema": "Схема",
+        "created": "Создан",
+        "updated": "Обновлён"
+      },
+      "badges": {
+        "verified": "Подтверждён",
+        "unverified": "Не подтверждён"
+      },
+      "bulk": {
+        "deleteUsers": "Удалить пользователей",
+        "activateUsers": "Активировать пользователей",
+        "deactivateUsers": "Деактивировать пользователей",
+        "description": "{label} — {n} пользователей",
+        "succeeded": "Выполнено: {n}",
+        "succeededWith": "Выполнено: {n}, ошибок: {failed}",
+        "cancel": "Отмена",
+        "start": "Начать",
+        "close": "Закрыть",
+        "processing": "Обработка..."
+      }
+    },
+    "detail": {
+      "failedToLoad": "Не удалось загрузить пользователя",
+      "retry": "Повторить",
+      "unknownName": "Пользователь без имени",
+      "edit": "Редактировать",
+      "recover": "Восстановить",
+      "deactivate": "Деактивировать",
+      "activate": "Активировать",
+      "delete": "Удалить",
+      "identityId": "ID учётной записи",
+      "state": "Состояние",
+      "schema": "Схема",
+      "created": "Создан",
+      "updated": "Обновлён",
+      "email": "Email",
+      "name": "Имя",
+      "via": "через {via}",
+      "verified": "Подтверждён",
+      "unverified": "Не подтверждён",
+      "noVerifiable": "Нет подтверждённых адресов",
+      "publicMetadata": "Публичные метаданные",
+      "adminMetadata": "Административные метаданные",
+      "sessions": "Сессии",
+      "active": "Активна",
+      "inactive": "Неактивна",
+      "moreSessions": "ещё {n} сессий",
+      "noSessions": "Сессии не найдены",
+      "deleteAllSessions": "Удалить все сессии",
+      "deleteUser": "Удалить пользователя",
+      "deleteUserConfirm": "Вы уверены, что хотите удалить этого пользователя? Это действие нельзя отменить.",
+      "deleteAllSessionsConfirm": "Вы уверены, что хотите удалить все сессии этого пользователя?",
+      "cancel": "Отмена",
+      "deleting": "Удаление...",
+      "editUser": "Редактировать пользователя",
+      "editUserDesc": "Обновить информацию профиля",
+      "deactivateUser": "Деактивировать пользователя",
+      "deactivateUserDesc": "Пользователь не сможет войти в систему.",
+      "activateUser": "Активировать пользователя",
+      "activateUserDesc": "Пользователь сможет снова войти в систему.",
+      "recoveryCode": "Код восстановления",
+      "recoveryCodeGenerated": "Код восстановления создан",
+      "recoveryLink": "Ссылка восстановления",
+      "recoveryLinkConfirm": "Отправить ссылку восстановления на {email}?",
+      "expiresAt": "Истекает {date}",
+      "close": "Закрыть",
+      "sendRecoveryLink": "Отправить ссылку",
+      "sending": "Отправка...",
+      "save": "Сохранить",
+      "saving": "Сохранение...",
+      "nameField": "Имя",
+      "emailField": "Email",
+      "deleteAllSessionsAction": "Удалить все сессии"
+    },
+    "create": {
+      "title": "Создать пользователя",
+      "description": "Зарегистрировать новую учётную запись",
+      "noAccess": "У вас нет прав для создания пользователей.",
+      "success": "Пользователь создан",
+      "successDesc": "Пользователь {name} успешно создан.",
+      "viewUser": "Просмотреть",
+      "backToUsers": "Назад к списку",
+      "userInfo": "Информация",
+      "displayName": "Отображаемое имя",
+      "displayNamePlaceholder": "Иван Иванов",
+      "email": "Email",
+      "emailPlaceholder": "ivan@example.com",
+      "password": "Пароль",
+      "passwordPlaceholder": "Оставьте пустым для отправки приглашения",
+      "passwordHint": "Установите начальный пароль. Оставьте пустым для настройки без пароля.",
+      "cancel": "Отмена",
+      "createUser": "Создать"
+    }
+  },
+  "sessions": {
+    "page": {
+      "title": "Сессии",
+      "description": "Просмотр активных сессий и устройств"
+    },
+    "table": {
+      "expired": "Истекла",
+      "remaining": "осталось {n} д {n} ч",
+      "remainingHours": "осталось {n} ч {n} мин",
+      "remainingMinutes": "осталось {n} мин",
+      "unknown": "Неизвестно",
+      "failedToLoad": "Не удалось загрузить сессии",
+      "retry": "Повторить",
+      "count": "{n} сессий",
+      "refresh": "Обновить",
+      "noSessions": "Сессии не найдены",
+      "columns": {
+        "identity": "Пользователь",
+        "status": "Статус",
+        "aal": "Уровень",
+        "authenticated": "Аутентифицирован",
+        "expires": "Истекает"
+      },
+      "status": {
+        "active": "Активна",
+        "inactive": "Неактивна"
+      }
+    },
+    "detail": {
+      "expired": "Истекла",
+      "remaining": "осталось {n} д {n} ч",
+      "remainingHours": "осталось {n} ч {n} мин",
+      "remainingMinutes": "осталось {n} мин",
+      "unknown": "Неизвестно",
+      "methods": {
+        "password": "Пароль",
+        "totp": "TOTP",
+        "passkey": "Passkey",
+        "magicLink": "Magic Link",
+        "recoveryCode": "Код восстановления",
+        "oidc": "OIDC"
+      },
+      "failedToLoad": "Не удалось загрузить сессию",
+      "retry": "Повторить",
+      "failedToRevoke": "Не удалось отозвать сессию",
+      "failedToExtend": "Не удалось продлить сессию",
+      "title": "Детали сессии",
+      "sessionId": "ID сессии",
+      "status": "Статус",
+      "active": "Активна",
+      "inactive": "Неактивна",
+      "aal": "Уровень подтверждения",
+      "authenticatedAt": "Время аутентификации",
+      "issuedAt": "Время выдачи",
+      "expiresAt": "Истекает",
+      "authenticationMethods": "Методы аутентификации",
+      "identityId": "ID учётной записи",
+      "displayName": "Отображаемое имя",
+      "state": "Состояние",
+      "schemaId": "ID схемы",
+      "identityTraits": "Атрибуты учётной записи",
+      "methodsUsed": "Использовано методов: {n}",
+      "devicesRegistered": "Зарегистрировано устройств: {n}",
+      "actions": "Действия",
+      "revoke": "Отозвать сессию",
+      "revoking": "Отзыв...",
+      "extend": "Продлить сессию",
+      "extending": "Продление...",
+      "backToSessions": "Назад к сессиям"
+    }
+  },
+  "clients": {
+    "page": {
+      "title": "Мои приложения",
+      "description": "Управление OAuth2 приложениями и API клиентами"
+    },
+    "create": {
+      "pageTitle": "Создать приложение",
+      "pageDescription": "Зарегистрировать новое OAuth2 приложение",
+      "noAccess": "У вас нет прав для создания приложений."
+    },
+    "edit": {
+      "pageTitle": "Редактировать приложение",
+      "noAccess": "У вас нет прав для редактирования приложений."
+    },
+    "list": {
+      "failedToLoad": "Не удалось загрузить приложения",
+      "retry": "Повторить",
+      "total": "Всего приложений",
+      "public": "Публичное (PKCE)",
+      "confidential": "Конфиденциальное",
+      "authCodeFlow": "Auth Code Flow",
+      "search": "Поиск приложений...",
+      "newApp": "Новое приложение",
+      "noResults": "Нет приложений по вашему запросу",
+      "noApps": "Пока нет приложений",
+      "createFirst": "Создайте своё первое приложение",
+      "columns": {
+        "name": "Название",
+        "clientId": "Client ID",
+        "type": "Тип",
+        "grantTypes": "Типы грантов",
+        "scopes": "Scopes",
+        "created": "Создан"
+      },
+      "unnamed": "Без имени",
+      "typePublic": "Публичное",
+      "typeConfidential": "Конфиденциальное",
+      "view": "Просмотр",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "deleteDialog": {
+        "title": "Удалить приложение",
+        "description": "Вы уверены, что хотите удалить это приложение? Это действие нельзя отменить.",
+        "cancel": "Отмена",
+        "deleting": "Удаление...",
+        "delete": "Удалить"
+      }
+    },
+    "detail": {
+      "failedToLoad": "Не удалось загрузить приложение",
+      "retry": "Повторить",
+      "unnamed": "Приложение без имени",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "basicInfo": "Основная информация",
+      "type": "Тип",
+      "authMethod": "Метод аутентификации",
+      "subjectType": "Тип субъекта",
+      "owner": "Владелец",
+      "clientCredentials": "Учётные данные",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "newSecret": "Новый Client Secret",
+      "regenerating": "Генерация...",
+      "regenerateSecret": "Сгенерировать новый секрет",
+      "oauth2Config": "Настройки OAuth2",
+      "grantTypes": "Типы грантов",
+      "none": "Нет",
+      "responseTypes": "Типы ответов",
+      "scopes": "Scopes",
+      "redirectUris": "Redirect URIs",
+      "noRedirectUris": "Redirect URIs не настроены",
+      "clientUri": "URI приложения",
+      "logoUri": "URI логотипа",
+      "advanced": "Расширенные настройки",
+      "subjectType2": "Тип субъекта",
+      "authMethod2": "Метод аутентификации",
+      "userinfoJwsAlg": "Алгоритм JWS Userinfo",
+      "backchannelLogoutUri": "Backchannel Logout URI",
+      "metadata": "Метаданные",
+      "created": "Создан",
+      "updated": "Обновлён",
+      "secretExpires": "Секрет истекает",
+      "customMetadata": "Пользовательские метаданные",
+      "deleteDialog": {
+        "title": "Удалить приложение",
+        "description": "Вы уверены, что хотите удалить это приложение? Это действие нельзя отменить.",
+        "cancel": "Отмена",
+        "deleting": "Удаление...",
+        "delete": "Удалить"
+      }
+    },
+    "form": {
+      "success": "Приложение создано",
+      "successDesc": "Ваше приложение успешно создано.",
+      "clientId": "Client ID",
+      "copied": "Скопировано!",
+      "clientSecret": "Client Secret",
+      "secretWarning": "Скопируйте client secret сейчас. Вы больше не сможете его увидеть.",
+      "type": "Тип приложения",
+      "typePublic": "Публичное (PKCE)",
+      "typeConfidential": "Конфиденциальное",
+      "viewApp": "Просмотреть",
+      "backToApps": "Назад к списку",
+      "basicInfo": "Основная информация",
+      "appName": "Название приложения",
+      "appNamePlaceholder": "Моё приложение",
+      "publicHint": "Публичный клиент (PKCE) — client_secret не требуется",
+      "redirectUris": "Redirect URIs",
+      "redirectUriPlaceholder": "https://example.com/callback",
+      "oauth2Config": "Настройки OAuth2",
+      "grantTypes": "Типы грантов",
+      "responseTypes": "Типы ответов",
+      "scopes": "Scopes",
+      "scopesPlaceholder": "openid profile email",
+      "scopesHint": "Список scopes через пробел",
+      "cancel": "Отмена",
+      "saveChanges": "Сохранить",
+      "createApp": "Создать приложение"
+    }
+  },
+  "messages": {
+    "page": {
+      "title": "Сообщения",
+      "description": "Мониторинг исходящих писем и уведомлений"
+    },
+    "table": {
+      "statuses": {
+        "all": "Все статусы",
+        "queued": "В очереди",
+        "sent": "Отправлено",
+        "failed": "Ошибка",
+        "processing": "Обработка",
+        "abandoned": "Отменено"
+      },
+      "failedToLoad": "Не удалось загрузить сообщения",
+      "retry": "Повторить",
+      "search": "Поиск по получателю, теме, ID, шаблону...",
+      "clearFilters": "Сбросить фильтры",
+      "noResults": "Нет сообщений по вашему запросу",
+      "noMessages": "Сообщения не найдены",
+      "columns": {
+        "type": "Тип",
+        "status": "Статус",
+        "recipient": "Получатель",
+        "subject": "Тема",
+        "template": "Шаблон",
+        "sendCount": "Отправок",
+        "created": "Создан"
+      },
+      "unknown": "Неизвестно",
+      "loadMore": "Загрузить ещё",
+      "showing": "Показано {n} сообщений, есть ещё"
+    },
+    "detail": {
+      "failedToLoad": "Не удалось загрузить сообщение",
+      "retry": "Повторить",
+      "backToMessages": "Назад к сообщениям",
+      "title": "Детали сообщения",
+      "noSubject": "Без темы",
+      "generalInfo": "Основная информация",
+      "messageId": "ID сообщения",
+      "status": "Статус",
+      "type": "Тип",
+      "channel": "Канал",
+      "defaultChannel": "По умолчанию",
+      "timing": "Время",
+      "createdAt": "Создано",
+      "updatedAt": "Обновлено",
+      "templateType": "Тип шаблона",
+      "sendCount": "Количество отправок",
+      "recipient": "Получатель",
+      "subject": "Тема",
+      "content": "Содержимое",
+      "deliveryAttempts": "Попытки доставки ({n})",
+      "dispatchId": "ID отправки",
+      "created": "Создана",
+      "updated": "Обновлена",
+      "template": "Шаблон"
+    }
+  },
+  "profile": {
+    "tabs": {
+      "general": "Основные",
+      "security": "Безопасность"
+    },
+    "general": {
+      "title": "Информация профиля",
+      "description": "Обновите данные своего профиля",
+      "loading": "Загрузка настроек...",
+      "failedToLoad": "Не удалось загрузить настройки: {error}",
+      "unableToLoad": "Не удалось загрузить настройки профиля.",
+      "saving": "Сохранение...",
+      "saveChanges": "Сохранить",
+      "fields": {
+        "traits": {
+          "email": "Email",
+          "name": "Имя"
+        }
+      }
+    },
+    "security": {
+      "title": "Безопасность",
+      "description": "Управление настройками безопасности",
+      "fields": {
+        "password": "Новый пароль",
+        "confirmPassword": "Подтвердите новый пароль",
+        "passwordMismatch": "Пароли не совпадают"
+      },
+      "changePassword": {
+        "title": "Сменить пароль",
+        "description": "Обновить пароль от аккаунта"
+      },
+      "totp": {
+        "title": "2FA — приложение-аутентификатор",
+        "description": "Настройка двухфакторной аутентификации через приложение"
+      },
+      "twoFactor": {
+        "title": "Двухфакторная аутентификация",
+        "description": "Защитите аккаунт с помощью приложения-аутентификатора и резервных кодов",
+        "enabled": "Двухфакторная аутентификация включена.",
+        "enabledDescription": "Ваш аккаунт защищён приложением-аутентификатором и резервными кодами.",
+        "enable": "Включить 2FA",
+        "remove": "Отключить 2FA",
+        "removeFailed": "Не удалось отключить двухфакторную аутентификацию",
+        "removing": "Отключение 2FA...",
+        "regenerateCodes": "Сгенерировать новые коды",
+        "generatingCodes": "Генерация резервных кодов...",
+        "generateFailed": "Не удалось сгенерировать коды восстановления",
+        "confirmFailed": "Не удалось подтвердить коды восстановления",
+        "saveCodesHint": "Сохраните эти резервные коды в надёжном месте. Они понадобятся для входа, если вы потеряете устройство.",
+        "copyCodes": "Скопировать коды",
+        "cancel": "Отмена",
+        "confirming": "Подтверждение...",
+        "confirmSave": "Я сохранил коды",
+        "unavailable": "Двухфакторная аутентификация в данный момент недоступна.",
+        "noPassword": "Настройки пароля недоступны."
+      },
+      "recoveryCodes": {
+        "title": "Резервные коды восстановления",
+        "description": "Создание и управление резервными кодами 2FA"
+      },
+      "saving": "Сохранение...",
+      "save": "Сохранить"
+    },
+    "reauth": {
+      "title": "Требуется повторная аутентификация",
+      "description": "Пожалуйста, подтвердите личность для выполнения этого действия.",
+      "cancel": "Отмена",
+      "continue": "Перейти к аутентификации"
+    }
+  },
+  "tokens": {
+    "page": {
+      "title": "Управление токенами",
+      "description": "Интроспекция и отзыв OAuth2 токенов"
+    },
+    "detail": {
+      "title": "Детали токена",
+      "description": "Информация об интроспектированном токене",
+      "tokenStatus": "Токен {active, select, true {Активен} other {Неактивен}} • Истекает через {time}",
+      "basicInfo": "Основная информация",
+      "subject": "Субъект",
+      "clientId": "Client ID",
+      "tokenType": "Тип токена",
+      "issuer": "Эмитент",
+      "username": "Имя пользователя",
+      "timestamps": "Метки времени",
+      "issuedAt": "Выдан (iat)",
+      "expiresAt": "Истекает (exp)",
+      "notBefore": "Не раньше (nbf)",
+      "scopes": "Scopes и аудитория",
+      "audience": "Аудитория",
+      "rawData": "Исходные данные",
+      "close": "Закрыть",
+      "expired": "Истёк",
+      "backToList": "← Назад к списку"
+    },
+    "introspect": {
+      "total": "Всего проинспектировано",
+      "active": "Активных",
+      "expiredInactive": "Истекло/Неактивно",
+      "expiring24h": "Истекают через 24ч",
+      "title": "Интроспекция токена",
+      "tokenList": "Список токенов",
+      "clearAll": "Очистить всё",
+      "accessToken": "Access Token",
+      "scope": "Scope (необязательно)",
+      "scopePlaceholder": "openid profile",
+      "introspect": "Интроспектировать",
+      "clear": "Очистить",
+      "failed": "Не удалось выполнить интроспекцию"
+    },
+    "table": {
+      "columns": {
+        "token": "Токен",
+        "status": "Статус",
+        "clientId": "Client ID",
+        "scopes": "Scopes",
+        "subject": "Субъект",
+        "expires": "Истекает"
+      },
+      "status": {
+        "active": "Активен",
+        "expired": "Истёк",
+        "inactive": "Неактивен"
+      }
+    },
+    "noTokens": "Токены ещё не интроспектировались",
+    "noTokensHint": "Используйте вкладку «Интроспекция» для анализа OAuth2 токенов",
+    "revoke": {
+      "title": "Отозвать токен",
+      "description": "Вы уверены, что хотите отозвать этот токен?",
+      "cancel": "Отмена",
+      "revoking": "Отзыв...",
+      "revoke": "Отозвать токен"
+    }
+  },
+  "adminApps": {
+    "page": {
+      "title": "Приложения платформы",
+      "description": "Все зарегистрированные OAuth2 приложения"
+    },
+    "table": {
+      "failedToLoad": "Не удалось загрузить приложения",
+      "retry": "Повторить",
+      "total": "Всего приложений",
+      "typePublic": "Публичное (PKCE)",
+      "typeConfidential": "Конфиденциальное",
+      "search": "Поиск приложений...",
+      "newApp": "Новое приложение",
+      "noResults": "Нет приложений по вашему запросу",
+      "noApps": "Приложения не зарегистрированы",
+      "columns": {
+        "name": "Название",
+        "clientId": "Client ID",
+        "type": "Тип",
+        "owner": "Владелец"
+      },
+      "unnamed": "Без имени",
+      "public": "Публичное",
+      "confidential": "Конфиденциальное",
+      "deleteDialog": {
+        "title": "Удалить приложение",
+        "description": "Вы уверены, что хотите удалить это приложение? Это действие нельзя отменить.",
+        "cancel": "Отмена",
+        "deleting": "Удаление...",
+        "delete": "Удалить"
+      }
+    }
+  },
+  "consent": {
+    "scopes": {
+      "openid": "Аутентификация через OpenID Connect",
+      "profile": "Просмотр информации профиля",
+      "email": "Просмотр email адреса",
+      "offlineAccess": "Офлайн-доступ (refresh token)"
+    },
+    "title": "Аутентификация через OpenID Connect",
+    "appName": "STORM ID",
+    "requesting": "{name} запрашивает доступ к вашему аккаунту",
+    "permissions": "Запрашиваемые разрешения",
+    "audience": "Аудитория",
+    "deny": "Отклонить",
+    "processing": "Обработка...",
+    "accept": "Разрешить"
+  },
+  "welcome": {
+    "sessionInfo": "Сессии",
+    "sessionInfoDesc": "Просмотр активных сессий и устройств",
+    "myApplications": "Мои приложения",
+    "myApplicationsDesc": "Управление OAuth2 приложениями",
+    "profile": "Профиль",
+    "profileDesc": "Настройки аккаунта и безопасность",
+    "manageRoles": "Управление ролями",
+    "manageRolesDesc": "Настройка ролей и прав доступа",
+    "dashboard": "Сводка",
+    "dashboardDesc": "Системная аналитика и метрики",
+    "greeting": "С возвращением, {name}!",
+    "signedInAs": "Вы вошли как {email}",
+    "subtitle": "Управление аккаунтом и приложениями"
+  },
+  "header": {
+    "logout": "Выйти",
+    "user": "Пользователь"
+  },
+  "common": {
+    "noAccess": "У вас нет доступа к этой странице.",
+    "language": "Язык",
+    "loading": "Загрузка...",
+    "retry": "Повторить",
+    "cancel": "Отмена",
+    "saving": "Сохранение...",
+    "save": "Сохранить",
+    "deleting": "Удаление...",
+    "delete": "Удалить",
+    "edit": "Редактировать"
+  },
+  "landing": {
+    "hero": {
+      "title": "STORM ID",
+      "subtitle": "Единая учётная запись для всех продуктов STORMHEAD",
+      "join": "Присоединиться"
+    },
+    "features": {
+      "title": "Что такое STORM ID",
+      "subtitle": "Identity provider для экосистемы STORMHEAD",
+      "sso": {
+        "title": "Единый вход",
+        "desc": "Один аккаунт для каждого продукта STORMHEAD. Без повторных авторизаций."
+      },
+      "security": {
+        "title": "Безопасность",
+        "desc": "Двухфакторная аутентификация, TOTP, резервные коды восстановления"
+      },
+      "enterprise": {
+        "title": "Identity уровня enterprise",
+        "desc": "На базе Ory — open-source платформы идентификации, развёрнутой на наших серверах. Тот же стек, что использует OpenAI."
+      }
+    },
+    "capabilities": {
+      "title": "Возможности платформы",
+      "oauth2": {
+        "title": "OAuth2 клиенты",
+        "desc": "Регистрируйте приложения с поддержкой PKCE, управляйте redirect URI и scopes"
+      },
+      "twofa": {
+        "title": "Двухфакторная защита",
+        "desc": "Приложения-аутентификаторы TOTP, резервные коды, апгрейд сессии до AAL2"
+      },
+      "sessions": {
+        "title": "Сессии и устройства",
+        "desc": "Просмотр активных сессий, отзыв доступа, мониторинг методов аутентификации"
+      }
+    },
+    "developers": {
+      "title": "Для разработчиков",
+      "desc": "Подключите своё приложение к STORM ID",
+      "hint": "OAuth2, OpenID Connect, PKCE, REST API"
+    },
+    "footer": {
+      "copyright": "© 2026 STORMHEAD. Все права защищены."
+    }
+  },
+  "toasts": {
+    "success": {
+      "roleCreated": "Роль «{name}» создана",
+      "roleUpdated": "Роль сохранена",
+      "roleDeleted": "Роль удалена",
+      "rolesReordered": "Роли пересортированы",
+      "identityCreated": "Пользователь создан",
+      "identityUpdated": "Пользователь сохранён",
+      "identityDeleted": "Пользователь удалён",
+      "identitiesBulkDeleted": "Удалено пользователей: {count}",
+      "identitiesBulkActivated": "Активировано пользователей: {count}",
+      "identitiesBulkDeactivated": "Деактивировано пользователей: {count}",
+      "identitySessionsRevoked": "Все сессии отозваны",
+      "clientCreated": "Приложение создано",
+      "clientUpdated": "Приложение сохранено",
+      "clientDeleted": "Приложение удалено",
+      "sessionRevoked": "Сессия отозвана",
+      "sessionExtended": "Сессия продлена",
+      "tokenRevoked": "Токен отозван",
+      "profileSaved": "Профиль сохранён",
+      "passwordChanged": "Пароль изменён",
+      "twoFactorEnabled": "2FA включена",
+      "twoFactorRemoved": "2FA отключена",
+      "lookupGenerated": "Резервные коды сгенерированы",
+      "lookupConfirmed": "Резервные коды сохранены",
+      "recoverySent": "Ссылка восстановления отправлена",
+      "secretRegenerated": "Секрет приложения перегенерирован"
+    },
+    "error": {
+      "generic": "Что-то пошло не так",
+      "roleCreateFailed": "Не удалось создать роль",
+      "roleDeleteFailed": "Не удалось удалить роль",
+      "roleUpdateFailed": "Не удалось сохранить роль",
+      "rolesReorderFailed": "Не удалось пересортировать роли",
+      "identityCreateFailed": "Не удалось создать пользователя",
+      "identityDeleteFailed": "Не удалось удалить пользователя",
+      "identityUpdateFailed": "Не удалось сохранить пользователя",
+      "identitySessionsRevokeFailed": "Не удалось отозвать сессии",
+      "identityStateFailed": "Не удалось изменить статус пользователя",
+      "identityRecoverFailed": "Не удалось отправить ссылку восстановления",
+      "clientCreateFailed": "Не удалось создать приложение",
+      "clientDeleteFailed": "Не удалось удалить приложение",
+      "clientUpdateFailed": "Не удалось сохранить приложение",
+      "sessionRevokeFailed": "Не удалось отозвать сессию",
+      "sessionExtendFailed": "Не удалось продлить сессию",
+      "tokenRevokeFailed": "Не удалось отозвать токен",
+      "tokenIntrospectFailed": "Не удалось проверить токен",
+      "tokenInactive": "Токен неактивен или истёк",
+      "profileSaveFailed": "Не удалось сохранить профиль",
+      "passwordChangeFailed": "Не удалось сменить пароль",
+      "twoFactorRemoveFailed": "Не удалось отключить 2FA",
+      "lookupGenerateFailed": "Не удалось сгенерировать коды",
+      "lookupConfirmFailed": "Не удалось подтвердить коды",
+      "regenerateSecretFailed": "Не удалось перегенерировать секрет",
+      "authFailed": "Ошибка аутентификации",
+      "flowFailed": "Не удалось загрузить форму аутентификации",
+      "roleAssignFailed": "Не удалось назначить роль",
+      "roleUnassignFailed": "Не удалось снять роль"
+    }
+  }
+}

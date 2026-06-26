@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STORM ID Test App</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.5;color:#1a1a1a;background:#f5f5f5}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,.08);padding:40px;max-width:640px;width:100%;text-align:center}
+.logo{margin-bottom:20px}
+h1{font-size:1.5rem;font-weight:600;margin-bottom:4px}
+.sub{color:#666;margin-bottom:24px;font-size:.875rem}
+.status{display:inline-block;padding:6px 16px;border-radius:20px;font-size:.875rem;font-weight:500;margin-bottom:24px}
+.status-ok{background:#dcfce7;color:#166534}
+.status-no{background:#fef2f2;color:#991b1b}
+.btn{display:inline-block;padding:12px 32px;border:none;border-radius:8px;font-size:1rem;font-weight:500;cursor:pointer;transition:opacity .15s;text-decoration:none}
+.btn:hover{opacity:.85}
+.btn-primary{background:#0a66c2;color:#fff}
+.btn-secondary{background:#e5e7eb;color:#374151}
+.error{background:#fef2f2;color:#991b1b;padding:12px;border-radius:8px;margin-bottom:20px;font-size:.875rem}
+table{width:100%;border-collapse:collapse;margin-top:16px;text-align:left}
+th,td{padding:8px 12px;border-bottom:1px solid #e5e7eb;vertical-align:top}
+th{background:#f8f9fa;font-size:.8125rem;text-transform:uppercase;letter-spacing:.05em;color:#888}
+.actions{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.config-bar{display:flex;align-items:center;justify-content:center;gap:8px;background:#f8f9fa;border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:.8125rem;flex-wrap:wrap}
+.config-bar code{background:#e5e7eb;padding:2px 6px;border-radius:4px;font-size:.75rem}
+.form-group{margin-bottom:16px;text-align:left}
+label{display:block;font-size:.875rem;font-weight:500;margin-bottom:4px;color:#374151}
+input{width:100%;padding:10px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:1rem;outline:none;transition:border-color .15s}
+input:focus{border-color:#0a66c2;box-shadow:0 0 0 3px rgba(10,102,194,.15)}
+.hint{font-size:.75rem;color:#888;margin-top:4px}
+#config-section{display:none;margin-top:16px}
+#config-section.visible{display:block}
+pre{background:#f8f9fa;padding:12px;border-radius:8px;font-size:12px;overflow-x:auto;margin-top:12px;text-align:left}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#0a66c2"/><path d="M24 12c-6.627 0-12 4.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 4a4 4 0 110 8 4 4 0 010-8zm0 16c-3.33 0-6.26-1.68-8-4.24C16 28 20 26 24 26s8 2 8 3.76c-1.74 2.56-4.67 4.24-8 4.24z" fill="#fff"/></svg></div>
+<h1>STORM ID Test App</h1>
+<p class="sub">Test OAuth2 authorization with your STORM ID instance</p>
+
+<div id="error-container"></div>
+
+<div class="config-bar" id="config-bar">
+  <span id="config-summary">No OAuth2 client configured</span>
+  <button class="btn btn-primary" style="padding:4px 12px;font-size:.75rem" onclick="toggleConfig()">Configure</button>
+</div>
+
+<div id="status-line" class="status status-no">Not authenticated</div>
+
+<div id="user-section" style="display:none">
+  <h2 style="font-size:1.125rem;margin-bottom:12px">User</h2>
+  <table id="user-table"><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody></tbody></table>
+
+  <h2 style="font-size:1.125rem;margin:20px 0 12px">Tokens</h2>
+  <table id="token-table"><thead><tr><th>Key</th><th>Value</th></tr></thead><tbody></tbody></table>
+
+  <div class="actions">
+    <a href="/logout" class="btn btn-secondary">Logout</a>
+    <button class="btn btn-secondary" onclick="toggleConfig()">Settings</button>
+  </div>
+</div>
+
+<div id="anon-section">
+  <p style="margin-bottom:20px;color:#555">Click the button below to sign in via STORM ID</p>
+  <div class="actions">
+    <button class="btn btn-primary" onclick="doLogin()">Sign in with STORM ID</button>
+    <button class="btn btn-secondary" onclick="toggleConfig()">Settings</button>
+  </div>
+</div>
+
+<div id="config-section">
+  <hr style="margin:24px 0;border-color:#e5e7eb">
+  <h2 style="font-size:1.125rem;margin-bottom:12px">OAuth2 Client Configuration</h2>
+
+  <div class="form-group">
+    <label for="client_id">Client ID *</label>
+    <input type="text" id="client_id" placeholder="e.g. abc123-uuid-from-hydra">
+  </div>
+
+  <div class="form-group">
+    <label for="client_secret">Client Secret</label>
+    <input type="text" id="client_secret" placeholder="Leave empty for public (PKCE) clients">
+    <div class="hint">For confidential clients only. Leave blank for PKCE.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="redirect_uri">Redirect URI *</label>
+    <input type="text" id="redirect_uri" placeholder="http://localhost:5173/callback">
+    <div class="hint">Must match the redirect URI registered with Hydra.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="hydra_browser_url">Hydra Browser URL *</label>
+    <input type="text" id="hydra_browser_url" placeholder="http://localhost:4444">
+    <div class="hint">The URL your browser uses to reach Hydra (e.g. http://localhost:4444 or https://id.yourdomain.com/api/hydra)</div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="saveConfig()">Save</button>
+    <button class="btn btn-secondary" onclick="toggleConfig()">Cancel</button>
+  </div>
+</div>
+</div>
+
+<script>
+const LS_KEY = "storm_id_test_config";
+
+function getConfig() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch { return {}; }
+}
+
+function saveConfig() {
+  const cfg = {
+    client_id: document.getElementById("client_id").value.trim(),
+    client_secret: document.getElementById("client_secret").value.trim(),
+    redirect_uri: document.getElementById("redirect_uri").value.trim(),
+    hydra_browser_url: document.getElementById("hydra_browser_url").value.trim(),
+  };
+  if (!cfg.client_id || !cfg.redirect_uri || !cfg.hydra_browser_url) {
+    showError("Client ID, Redirect URI, and Hydra Browser URL are required");
+    return;
+  }
+  localStorage.setItem(LS_KEY, JSON.stringify(cfg));
+  updateConfigBar(cfg);
+  toggleConfig();
+}
+
+function toggleConfig() {
+  const section = document.getElementById("config-section");
+  const visible = section.classList.toggle("visible");
+  if (visible) {
+    const cfg = getConfig();
+    document.getElementById("client_id").value = cfg.client_id || "";
+    document.getElementById("client_secret").value = cfg.client_secret || "";
+    document.getElementById("redirect_uri").value = cfg.redirect_uri || "";
+    document.getElementById("hydra_browser_url").value = cfg.hydra_browser_url || "";
+  }
+}
+
+function updateConfigBar(cfg) {
+  const bar = document.getElementById("config-summary");
+  if (cfg && cfg.client_id) {
+    bar.innerHTML = 'Client ID: <code>' + cfg.client_id.substring(0, 8) + '...</code>';
+  } else {
+    bar.innerHTML = 'No OAuth2 client configured';
+  }
+}
+
+function getFormFields() {
+  return {
+    client_id: document.getElementById("client_id").value.trim(),
+    client_secret: document.getElementById("client_secret").value.trim(),
+    redirect_uri: document.getElementById("redirect_uri").value.trim(),
+    hydra_browser_url: document.getElementById("hydra_browser_url").value.trim(),
+  };
+}
+
+function doLogin() {
+  const form = getFormFields();
+  const saved = getConfig();
+  const cfg = {};
+  for (const key of Object.keys(form)) {
+    cfg[key] = form[key] || saved[key] || "";
+  }
+  if (!cfg.client_id || !cfg.redirect_uri || !cfg.hydra_browser_url) {
+    toggleConfig();
+    showError("Please configure your OAuth2 client first");
+    return;
+  }
+  localStorage.setItem(LS_KEY, JSON.stringify(cfg));
+  const params = new URLSearchParams(cfg);
+  window.location.href = "/login?" + params.toString();
+}
+
+function showError(msg) {
+  const el = document.getElementById("error-container");
+  el.innerHTML = '<div class="error">' + msg + '</div>';
+  setTimeout(() => { el.innerHTML = ""; }, 8000);
+}
+
+function renderUser(user, tokens) {
+  document.getElementById("status-line").className = "status status-ok";
+  document.getElementById("status-line").textContent = "Authenticated";
+  document.getElementById("user-section").style.display = "block";
+  document.getElementById("anon-section").style.display = "none";
+
+  const userRows = Object.entries(user).filter(([k]) => k !== 'iat' && k !== 'exp').map(([k, v]) =>
+    '<tr><td><strong>' + k + '</strong></td><td>' + (typeof v === 'object' ? JSON.stringify(v) : v) + '</td></tr>'
+  ).join('');
+  document.getElementById("user-table").tBodies[0].innerHTML = userRows;
+
+  const tokenRows = Object.entries(tokens).filter(([k]) => k !== 'id_token').map(([k, v]) =>
+    '<tr><td><strong>' + k + '</strong></td><td style="word-break:break-all;font-size:12px">' + v + '</td></tr>'
+  ).join('');
+  document.getElementById("token-table").tBodies[0].innerHTML = tokenRows;
+}
+
+async function init() {
+  const cfg = getConfig();
+  updateConfigBar(cfg);
+
+  try {
+    const res = await fetch("/api/session");
+    const data = await res.json();
+    if (data.user) {
+      renderUser(data.user, data.tokens);
+    }
+  } catch {}
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const error = urlParams.get("error");
+  if (error) showError(decodeURIComponent(error));
+}
+
+init();
+</script>
+</body>
+</html>

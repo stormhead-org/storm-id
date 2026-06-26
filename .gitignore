@@ -1,0 +1,26 @@
+# Environment
+.env
+opencode.json
+
+# Generated config files (run scripts/generate-config.sh)
+configs/hydra/hydra.yaml
+configs/kratos/kratos.yaml
+configs/keto/keto.yaml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+postgres-data/
+
+# Node
+node_modules/
+.next/
+dist/

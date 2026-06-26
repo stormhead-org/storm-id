@@ -1,0 +1,136 @@
+serve:
+  public:
+    port: 4433
+    base_url: __KRATOS_BASE_URL__
+    cors:
+      enabled: true
+      allowed_origins:
+        - __PUBLIC_URL__
+        - __HYDRA_PUBLIC_URL__
+      allowed_methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      allowed_headers:
+        - Authorization
+        - Content-Type
+        - Cookie
+      exposed_headers:
+        - Set-Cookie
+      allow_credentials: true
+      debug: false
+  admin:
+    port: 4434
+
+selfservice:
+  default_browser_return_url: __PUBLIC_URL__/welcome
+  allowed_return_urls:
+    - __PUBLIC_URL__/
+    - __PUBLIC_URL__/welcome
+    - __PUBLIC_URL__/profile
+
+  methods:
+    password:
+      enabled: true
+      config:
+        haveibeenpwned_enabled: true
+        min_password_length: 12
+        identifier_similarity_check_enabled: true
+    totp:
+      enabled: true
+      config:
+        issuer: STORM ID
+    webauthn:
+      enabled: true
+      config:
+        passwordless: false
+        rp:
+          id: __WEBAUTHN_RP_ID__
+          origin: __PUBLIC_URL__
+          display_name: STORM ID
+    passkey:
+      enabled: false
+    lookup_secret:
+      enabled: true
+    code:
+      enabled: true
+      config:
+        lifespan: 10m
+
+  flows:
+    error:
+      ui_url: __PUBLIC_URL__/error
+
+    login:
+      ui_url: __PUBLIC_URL__/login
+      lifespan: 30m
+      after:
+        default_browser_return_url: __PUBLIC_URL__/welcome
+
+    registration:
+      ui_url: __PUBLIC_URL__/registration
+      lifespan: 30m
+      after:
+        default_browser_return_url: __PUBLIC_URL__/welcome
+        password:
+          hooks:
+            - hook: session
+
+    verification:
+      enabled: true
+      ui_url: __PUBLIC_URL__/verification
+      lifespan: 1h
+      after:
+        default_browser_return_url: __PUBLIC_URL__/
+
+    recovery:
+      enabled: true
+      ui_url: __PUBLIC_URL__/recovery
+      lifespan: 1h
+      after:
+        default_browser_return_url: __PUBLIC_URL__/login
+
+    settings:
+      ui_url: __PUBLIC_URL__/profile
+      lifespan: 30m
+      privileged_session_max_age: 15m
+
+    logout:
+      after:
+        default_browser_return_url: __PUBLIC_URL__/login
+
+identity:
+  default_schema_id: default
+  schemas:
+    - id: default
+      url: file:///etc/kratos/identity.schema.json
+
+session:
+  cookie:
+    domain: __COOKIE_DOMAIN__
+    path: /
+    same_site: Lax
+    name: __KRATOS_COOKIE_NAME__
+    persistent: true
+  lifespan: 24h
+
+log:
+  level: info
+  format: json
+
+secrets:
+  cookie:
+    - ${KRATOS_SECRETS_COOKIE}
+  cipher:
+    - ${KRATOS_SECRETS_CIPHER}
+
+courier:
+  smtp:
+    connection_uri: __SMTP_URI__
+    from_address: __SMTP_FROM__
+    from_name: __SMTP_FROM_NAME__
+  worker:
+    pull_interval: 5s
+    max_sending_workers: 8
