@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useTranslations, useLocale } from "@/src/shared/lib/i18n";
 import { Button } from "@/src/shared/components/ui/button";
@@ -30,6 +30,8 @@ export default function LandingPage() {
   const t = useTranslations();
   const { theme, setTheme } = useTheme();
   const locale = useLocale();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const switchLocale = useCallback(() => {
     const next = locale === "en" ? "ru" : "en";
@@ -57,7 +59,7 @@ export default function LandingPage() {
           aria-label="Toggle theme"
           className="size-9 rounded-full text-muted-foreground hover:bg-accent hover:text-foreground"
         >
-          {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          {mounted ? (theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />) : <div className="size-4" />}
         </Button>
       </div>
 
