@@ -1,8 +1,28 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { AdminHeader } from "@/src/widgets/navigation/AdminHeader";
 import { AdminSidebar } from "@/src/widgets/navigation/AdminSidebar";
 import { Container } from "@/src/shared/components/Container";
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+const kratosPublicUrl = process.env.KRATOS_PUBLIC_URL || "http://kratos:4433";
+
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const sessionCookie = cookieStore.get("ory_kratos_session");
+
+  if (!sessionCookie) {
+    redirect("/login");
+  }
+
+  const sessionRes = await fetch(`${kratosPublicUrl}/sessions/whoami`, {
+    headers: { Cookie: `ory_kratos_session=${sessionCookie.value}` },
+    redirect: "manual",
+  });
+
+  if (!sessionRes.ok) {
+    redirect("/login");
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <AdminHeader />

@@ -19,6 +19,8 @@ import { Badge } from "@/src/shared/components/ui/badge";
 import { useTranslations } from "@/src/shared/lib/i18n";
 import type { Role } from "@/src/features/roles/hooks/useRoles";
 import { useReorderRoles } from "@/src/features/roles/hooks/useRoles";
+import { useSession } from "@/src/shared/hooks/useSession";
+import { matchPermission } from "@/src/shared/lib/permission-utils";
 
 interface RolesListProps {
   roles: Role[];
@@ -34,12 +36,14 @@ function SortableRoleRow({
   onDelete,
   canDelete,
   canDrag,
+  isLocked,
 }: {
   role: Role;
   onSelect: () => void;
   onDelete: () => void;
   canDelete: boolean;
   canDrag: boolean;
+  isLocked?: boolean;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: role.id,
@@ -58,7 +62,11 @@ function SortableRoleRow({
       style={style}
       className="flex items-center justify-between p-3 bg-muted/50 rounded-xl hover:bg-accent/50 transition-colors group"
     >
-      {canDrag && (
+      {isLocked ? (
+        <div className="flex items-center p-1 text-muted-foreground/50 shrink-0">
+          <Lock className="size-4" />
+        </div>
+      ) : canDrag ? (
         <div
           {...attributes}
           {...listeners}
@@ -66,7 +74,7 @@ function SortableRoleRow({
         >
           <GripVertical className="size-4" />
         </div>
-      )}
+      ) : null}
       <div
         className="flex items-center gap-3 min-w-0 flex-1 ml-2 cursor-pointer"
         onClick={onSelect}
@@ -76,13 +84,15 @@ function SortableRoleRow({
       </div>
       <div className="flex items-center gap-3 shrink-0">
         {canDelete && (
-          <Trash2
-            className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-destructive transition-all"
+          <div
+            className="shrink-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg p-1 transition-colors cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               onDelete();
             }}
-          />
+          >
+            <Trash2 className="size-4" />
+          </div>
         )}
         <ChevronRight className="size-4 text-muted-foreground" />
       </div>
@@ -100,6 +110,8 @@ export function RolesList({
   const t = useTranslations();
   const [searchTerm, setSearchTerm] = useState("");
   const reorderRoles = useReorderRoles();
+  const { maxPosition, permissions } = useSession();
+  const isSuperAdmin = matchPermission(permissions, "admin:*");
 
   const everyoneRole = roles.find((r) => r.name === "@everyone");
   const ownerRole = roles.find((r) => r.is_system && !r.is_default);
@@ -132,9 +144,12 @@ export function RolesList({
       const [moved] = newSorted.splice(oldIndex, 1);
       newSorted.splice(newIndex, 0, moved);
 
-      reorderRoles.mutate(newSorted.map((r) => r.id));
+      const orderedIds = newSorted
+        .filter((r) => isSuperAdmin || r.position < maxPosition)
+        .map((r) => r.id);
+      reorderRoles.mutate(orderedIds);
     },
-    [filteredRoles, reorderRoles, canManage],
+    [filteredRoles, reorderRoles, canManage, isSuperAdmin, maxPosition],
   );
 
   return (
@@ -222,16 +237,21 @@ export function RolesList({
                 {t("roles.list.notFound")}
               </p>
             ) : (
-              filteredRoles.map((role) => (
-                <SortableRoleRow
-                  key={role.id}
-                  role={role}
-                  onSelect={() => onSelectRole(role)}
-                  onDelete={() => onDeleteRole(role.id)}
-                  canDelete={canManage}
-                  canDrag={canManage}
-                />
-              ))
+              filteredRoles.map((role) => {
+                const canDrag = canManage && (isSuperAdmin || role.position < maxPosition);
+                const isLocked = canManage && !isSuperAdmin && role.position >= maxPosition;
+                return (
+                  <SortableRoleRow
+                    key={role.id}
+                    role={role}
+                    onSelect={() => onSelectRole(role)}
+                    onDelete={() => onDeleteRole(role.id)}
+                    canDelete={canManage && (isSuperAdmin || role.position < maxPosition)}
+                    canDrag={canDrag}
+                    isLocked={isLocked}
+                  />
+                );
+              })
             )}
           </div>
         </SortableContext>

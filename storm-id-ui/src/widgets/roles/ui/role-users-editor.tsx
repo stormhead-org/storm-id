@@ -21,6 +21,7 @@ interface RoleUsersEditorProps {
   role: Role;
   identities: Identity[];
   assignedUserIds: string[];
+  readOnly?: boolean;
   onAssign: (roleIds: string[]) => Promise<void>;
   onUnassign: (userId: string) => Promise<void>;
 }
@@ -29,6 +30,7 @@ export function RoleUsersEditor({
   role,
   identities,
   assignedUserIds,
+  readOnly,
   onAssign,
   onUnassign,
 }: RoleUsersEditorProps) {
@@ -53,10 +55,12 @@ export function RoleUsersEditor({
           onChange={(e) => setSearch(e.target.value)}
           className="flex-1"
         />
-        <Button onClick={() => setShowAddModal(true)} className="gap-2">
-          <Plus className="size-4" />
-          {t("roles.users.add")}
-        </Button>
+        {!readOnly && (
+          <Button onClick={() => setShowAddModal(true)} className="gap-2">
+            <Plus className="size-4" />
+            {t("roles.users.add")}
+          </Button>
+        )}
       </div>
 
       <RoleAddUserModal
@@ -90,10 +94,12 @@ export function RoleUsersEditor({
                   </p>
                 </div>
               </div>
-              <X
-                className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-destructive cursor-pointer transition-all shrink-0"
-                onClick={() => onUnassign(user.id)}
-              />
+              {!readOnly && (
+                <X
+                  className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-destructive cursor-pointer transition-all shrink-0"
+                  onClick={() => onUnassign(user.id)}
+                />
+              )}
             </div>
           ))
         )}

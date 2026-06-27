@@ -278,15 +278,12 @@ shared   → entities → features → widgets → pages → app
 ## Docker
 
 ```bash
-# Быстрая пересборка (с build-arg для клиентского SDK URL)
-docker build --build-arg NEXT_PUBLIC_ORY_SDK_URL=http://localhost:4455 -t storm-id-storm-id-ui -f storm-id-ui/Dockerfile storm-id-ui/
-# ИЛИ через compose (dev)
-docker compose -f docker-compose.dev.yml build --build-arg NEXT_PUBLIC_ORY_SDK_URL=http://localhost:4455 storm-id-ui
-# Запуск всего стека (dev)
+# Пересборка и запуск всего стека (всегда используй -f docker-compose.dev.yml)
 docker compose -f docker-compose.dev.yml up -d
-# Пересборка и запуск одного сервиса
-docker compose -f docker-compose.dev.yml build storm-id-ui && docker compose -f docker-compose.dev.yml up -d storm-id-ui
-docker compose -f docker-compose.dev.yml build test-app && docker compose -f docker-compose.dev.yml up -d test-app
+
+# Пересборка и запуск одного сервиса (build.args уже в compose)
+docker compose -f docker-compose.dev.yml up -d storm-id-ui
+docker compose -f docker-compose.dev.yml up -d test-app
 
 # Логи
 docker compose -f docker-compose.dev.yml logs -f storm-id-ui

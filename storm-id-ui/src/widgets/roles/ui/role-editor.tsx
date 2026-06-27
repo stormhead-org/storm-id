@@ -87,7 +87,7 @@ export function RoleEditor({ onBack, initialRoleId }: RoleEditorProps) {
   const accessibleRoles = useMemo(
     () =>
       roles?.filter(
-        (r) => !(!isSuperAdmin && r.position > maxPosition) && !(r.is_default && !canEditDefault),
+        (r) => !(!isSuperAdmin && r.position >= maxPosition) && !(r.is_default && !canEditDefault),
       ) ?? [],
     [roles, isSuperAdmin, maxPosition, canEditDefault],
   );
@@ -407,7 +407,7 @@ export function RoleEditor({ onBack, initialRoleId }: RoleEditorProps) {
                   role={selectedRole}
                   isEveryone={isEveryoneRole}
                   isOwner={isOwnerRole}
-                  readOnly={!canManage}
+                  readOnly={!canManage || (selectedRole.position >= maxPosition && !isSuperAdmin) || (selectedRole.is_default && !canEditDefault)}
                   onSave={handleUpdateRole}
                 />
               )}
@@ -416,7 +416,7 @@ export function RoleEditor({ onBack, initialRoleId }: RoleEditorProps) {
                 <RolePermissionsEditor
                   role={selectedRole}
                   userPermissions={permissions}
-                  readOnly={!canManage || (selectedRole.position >= maxPosition && !isSuperAdmin)}
+                  readOnly={!canManage || (selectedRole.position >= maxPosition && !isSuperAdmin) || (selectedRole.is_default && !canEditDefault)}
                   onSave={async (newPerms) => {
                     await handleUpdateRole({ permissions: newPerms });
                   }}
@@ -434,6 +434,7 @@ export function RoleEditor({ onBack, initialRoleId }: RoleEditorProps) {
                   role={selectedRole}
                   identities={identities || []}
                   assignedUserIds={assignedUserIds}
+                  readOnly={!canManage || (selectedRole.position >= maxPosition && !isSuperAdmin) || (selectedRole.is_default && !canEditDefault)}
                   onAssign={async (userIds) => {
                     try {
                       for (const userId of userIds) {

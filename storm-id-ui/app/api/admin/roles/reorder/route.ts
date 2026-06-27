@@ -49,7 +49,7 @@ export async function PUT(request: NextRequest) {
   if (!isSuperAdmin) {
     for (const roleId of roleIds) {
       const role = rolesMap.get(roleId);
-      if (role !== undefined && role.position > maxPosition) {
+      if (role !== undefined && role.position >= maxPosition) {
         return NextResponse.json(
           { error: `Insufficient hierarchy: cannot reorder role "${roleId}"` },
           { status: 403 },
