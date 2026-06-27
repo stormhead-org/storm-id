@@ -77,6 +77,7 @@ services:
       - DSN=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${KRATOS_DB}?sslmode=disable&max_conns=20
       - SECRETS_COOKIE=${KRATOS_SECRETS_COOKIE}
       - SECRETS_CIPHER=${KRATOS_SECRETS_CIPHER}
+      - KRATOS_PUBLIC_BASE_URL=${KRATOS_PUBLIC_BASE_URL}
     # ports:
     #   - "4433:4433"
     #   - "4434:4434"
@@ -200,6 +201,7 @@ services:
       - HYDRA_STATE_SECRET=${HYDRA_STATE_SECRET}
       - PUBLIC_URL=${PUBLIC_URL}
       - KRATOS_COOKIE_NAME=${KRATOS_COOKIE_NAME:-ory_kratos_session}
+      - ORY_SDK_URL=http://kratos:4433
     depends_on:
       stormid-migrate:
         condition: service_completed_successfully

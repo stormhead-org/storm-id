@@ -40,7 +40,6 @@ if [ "$MODE" = "dev" ]; then
   PUBLIC_URL="${PUBLIC_URL:-http://localhost:4455}"
   HYDRA_PKCE_ENFORCED="${HYDRA_PKCE_ENFORCED:-false}"
   HYDRA_PUBLIC_URL="http://localhost:4444"
-  KRATOS_BASE_URL="http://localhost:4433/"
   COOKIE_DOMAIN="localhost"
   WEBAUTHN_RP_ID="localhost"
   KRATOS_COOKIE_NAME="${KRATOS_COOKIE_NAME:-ory_kratos_session}"
@@ -57,7 +56,6 @@ else
 
   HYDRA_PKCE_ENFORCED="${HYDRA_PKCE_ENFORCED:-true}"
   HYDRA_PUBLIC_URL="${PUBLIC_URL}/api/hydra"
-  KRATOS_BASE_URL="${PUBLIC_URL}/api/kratos/"
 
   # Extract domain parts from PUBLIC_URL
   HOSTNAME="$(echo "$PUBLIC_URL" | sed -E 's|^https?://||;s|/.*||;s|:[0-9]+$||')"
@@ -86,7 +84,7 @@ echo "⚙  Generating configs for: $MODE"
 echo "   PUBLIC_URL:  $PUBLIC_URL"
 echo "   Cookie domain: $COOKIE_DOMAIN"
 echo "   WebAuthn RP:  $WEBAUTHN_RP_ID"
-echo "   KRATOS base:  $KRATOS_BASE_URL"
+echo "   KRATOS base:  (env: \$KRATOS_PUBLIC_BASE_URL)"
 echo "   PKCE enforced: $HYDRA_PKCE_ENFORCED"
 echo "   SMTP: ${SMTP_URI:0:50}..."
 echo ""
@@ -100,7 +98,6 @@ replace_placeholders() {
     -e "s|__HYDRA_PKCE_ENFORCED__|${HYDRA_PKCE_ENFORCED}|g" \
     -e "s|__COOKIE_DOMAIN__|${COOKIE_DOMAIN}|g" \
     -e "s|__WEBAUTHN_RP_ID__|${WEBAUTHN_RP_ID}|g" \
-    -e "s|__KRATOS_BASE_URL__|${KRATOS_BASE_URL}|g" \
     -e "s|__KRATOS_COOKIE_NAME__|${KRATOS_COOKIE_NAME}|g" \
     -e "s|__SMTP_URI__|${SMTP_URI}|g" \
     -e "s|__SMTP_FROM__|${SMTP_FROM}|g" \
