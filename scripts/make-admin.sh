@@ -40,7 +40,7 @@ fi
 echo "✓ Found identity: $IDENTITY_ID"
 
 echo "🔍 Looking up @owner role UUID..."
-OWNER_UUID=$(docker compose -f docker-compose.dev.yml exec -T postgres psql -U "$POSTGRES_USER" -d stormid -t -A \
+OWNER_UUID=$(docker exec "$POSTGRES_HOST" psql -h localhost -U "$POSTGRES_USER" -d stormid -t -A \
   -c "SELECT id FROM roles WHERE name = '@owner' LIMIT 1;" 2>/dev/null || true)
 
 if [ -z "$OWNER_UUID" ]; then
