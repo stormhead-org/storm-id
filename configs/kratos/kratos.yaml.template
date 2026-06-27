@@ -1,7 +1,7 @@
 serve:
   public:
     port: 4433
-    base_url: ${KRATOS_PUBLIC_BASE_URL}
+    base_url: __PUBLIC_URL__
     cors:
       enabled: true
       allowed_origins:

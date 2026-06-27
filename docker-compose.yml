@@ -77,7 +77,6 @@ services:
       - DSN=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${KRATOS_DB}?sslmode=disable&max_conns=20
       - SECRETS_COOKIE=${KRATOS_SECRETS_COOKIE}
       - SECRETS_CIPHER=${KRATOS_SECRETS_CIPHER}
-      - KRATOS_PUBLIC_BASE_URL=${KRATOS_PUBLIC_BASE_URL}
     # ports:
     #   - "4433:4433"
     #   - "4434:4434"
