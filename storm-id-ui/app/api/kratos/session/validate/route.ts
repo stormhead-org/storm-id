@@ -7,6 +7,7 @@ import {
 } from "@/src/shared/lib/permissions";
 import { query } from "@/src/shared/lib/db";
 import { log } from "@/src/shared/lib/logger";
+import { KRATOS_SESSION_COOKIE } from "@/src/shared/constants/cookies";
 
 const kratosPublicUrl = process.env.KRATOS_PUBLIC_URL || "http://kratos:4433";
 
@@ -23,7 +24,7 @@ interface SessionData {
 
 export async function GET(request: NextRequest) {
   const cookieHeader = request.headers.get("cookie") || "";
-  const hasSessionCookie = cookieHeader.includes("ory_kratos_session");
+  const hasSessionCookie = cookieHeader.includes(KRATOS_SESSION_COOKIE);
 
   log("session/validate:GET:start", { hasSessionCookie, cookieLength: cookieHeader.length });
 

@@ -3,20 +3,21 @@ import { redirect } from "next/navigation";
 import { AdminHeader } from "@/src/widgets/navigation/AdminHeader";
 import { AdminSidebar } from "@/src/widgets/navigation/AdminSidebar";
 import { Container } from "@/src/shared/components/Container";
+import { KRATOS_SESSION_COOKIE } from "@/src/shared/constants/cookies";
 import { getUserRoles, getRolePermissions } from "@/src/shared/lib/permissions";
 
 const kratosPublicUrl = process.env.KRATOS_PUBLIC_URL || "http://kratos:4433";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get("ory_kratos_session");
+  const sessionCookie = cookieStore.get(KRATOS_SESSION_COOKIE);
 
   if (!sessionCookie) {
     redirect("/login");
   }
 
   const sessionRes = await fetch(`${kratosPublicUrl}/sessions/whoami`, {
-    headers: { Cookie: `ory_kratos_session=${sessionCookie.value}` },
+    headers: { Cookie: `${KRATOS_SESSION_COOKIE}=${sessionCookie.value}` },
     redirect: "manual",
   });
 
