@@ -46,6 +46,14 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
     const clientOwner = client.owner as string | undefined;
     log("clients:regenerate-secret:client-owner", { clientId, clientOwner, identityId });
 
+    if (client.token_endpoint_auth_method === "none") {
+      log("clients:regenerate-secret:public-client-rejected", { clientId });
+      return NextResponse.json(
+        { error: "Cannot regenerate secret for public client (token_endpoint_auth_method=none)" },
+        { status: 400 },
+      );
+    }
+
     if (clientOwner !== identityId) {
       log("clients:regenerate-secret:checking-admin-permission");
       const perm = await requirePermission(_request, "admin:clients.manage");

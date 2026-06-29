@@ -100,6 +100,7 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
   const canAdmin = matchPermission(profile?.permissions ?? [], "admin:clients.manage");
   const isOwner = client && client.owner && client.owner === profile?.identityId;
   const canManage = isOwner || canAdmin;
+  const isPublicClient = client && client.token_endpoint_auth_method === "none";
 
   if (isLoading) {
     return <DetailSkeleton sections={5} />;
@@ -190,11 +191,11 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
                   {t("clients.detail.type")}
                 </p>
                 <Badge
-                  variant={client.token_endpoint_auth_method === "none" ? "secondary" : "default"}
+                  variant={isPublicClient ? "secondary" : "default"}
                 >
-                  {client.token_endpoint_auth_method === "none"
-                    ? t("clients.detail.type")
-                    : t("clients.detail.type")}
+                  {isPublicClient
+                    ? t("clients.typePublic")
+                    : t("clients.typeConfidential")}
                 </Badge>
               </div>
               <div>
@@ -228,13 +229,13 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
           >
             <div className="space-y-4">
               <CopyField label={t("clients.detail.clientId")} value={client.client_id} />
-              {client.client_secret && !regenerated && (
+              {!isPublicClient && client.client_secret && !regenerated && (
                 <CopyField label={t("clients.detail.clientSecret")} value={client.client_secret} />
               )}
-              {regenerated && (
+              {!isPublicClient && regenerated && (
                 <CopyField label={t("clients.detail.newSecret")} value={regenerated} />
               )}
-              {canManage && (
+              {!isPublicClient && canManage && (
                 <div className="flex justify-end">
                   <Button
                     variant="outline"
