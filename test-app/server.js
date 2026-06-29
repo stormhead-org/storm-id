@@ -113,7 +113,7 @@ app.get("/callback", async (req, res) => {
       headers["Authorization"] = `Basic ${basic}`;
     }
 
-    const tokenResponse = await fetch(`${HYDRA_INT_URL}/oauth2/token`, {
+    const tokenResponse = await fetch(`${cfg.hydra_browser_url}/oauth2/token`, {
       method: "POST",
       headers,
       body,
