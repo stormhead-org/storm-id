@@ -194,8 +194,8 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
                   variant={isPublicClient ? "secondary" : "default"}
                 >
                   {isPublicClient
-                    ? t("clients.typePublic")
-                    : t("clients.typeConfidential")}
+                    ? t("clients.list.typePublic")
+                    : t("clients.list.typeConfidential")}
                 </Badge>
               </div>
               <div>
