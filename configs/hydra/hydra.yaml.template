@@ -5,7 +5,6 @@ serve:
       enabled: true
       allowed_origins:
         - __PUBLIC_URL__
-        - __HYDRA_PUBLIC_URL__
       allowed_methods:
         - GET
         - POST
