@@ -55,7 +55,7 @@ else
   fi
 
   HYDRA_PKCE_ENFORCED="${HYDRA_PKCE_ENFORCED:-true}"
-  HYDRA_PUBLIC_URL="${PUBLIC_URL}/api/hydra"
+  HYDRA_PUBLIC_URL="${PUBLIC_URL}"
 
   # Extract domain parts from PUBLIC_URL
   HOSTNAME="$(echo "$PUBLIC_URL" | sed -E 's|^https?://||;s|/.*||;s|:[0-9]+$||')"
