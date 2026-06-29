@@ -15,7 +15,7 @@ services:
     container_name: storm-id-hydra
     image: oryd/hydra:v26.2.0
     restart: unless-stopped
-    command: serve -c /etc/hydra/hydra.yaml all ${HYDRA_DEV_MODE:+--dev}
+    command: serve -c /etc/hydra/hydra.yaml all --dev
     environment:
       - DSN=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${HYDRA_DB}?sslmode=disable&max_conns=20
       - SECRETS_SYSTEM=${HYDRA_SECRETS_SYSTEM}

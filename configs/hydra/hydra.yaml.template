@@ -1,10 +1,6 @@
 serve:
   public:
     port: 4444
-    tls:
-      enabled: true
-      allow_termination_from:
-        - __TLS_CIDR__
     cors:
       enabled: true
       allowed_origins:
