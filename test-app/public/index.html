@@ -96,7 +96,13 @@ pre{background:#f8f9fa;padding:12px;border-radius:8px;font-size:12px;overflow-x:
   <div class="form-group">
     <label for="hydra_browser_url">Hydra Browser URL *</label>
     <input type="text" id="hydra_browser_url" placeholder="http://localhost:4444">
-    <div class="hint">The URL your browser uses to reach Hydra (e.g. http://localhost:4444 or https://id.yourdomain.com/api/hydra)</div>
+    <div class="hint">The URL your browser uses to reach Hydra (e.g. http://localhost:4444 or https://id.yourdomain.com)</div>
+  </div>
+
+  <div class="form-group">
+    <label for="hydra_server_url">Hydra Server URL</label>
+    <input type="text" id="hydra_server_url" placeholder="http://hydra:4444">
+    <div class="hint">Internal URL for token exchange (e.g. http://hydra:4444). Leave empty to use Browser URL.</div>
   </div>
 
   <div class="actions">
@@ -119,6 +125,7 @@ function saveConfig() {
     client_secret: document.getElementById("client_secret").value.trim(),
     redirect_uri: document.getElementById("redirect_uri").value.trim(),
     hydra_browser_url: document.getElementById("hydra_browser_url").value.trim(),
+    hydra_server_url: document.getElementById("hydra_server_url").value.trim(),
   };
   if (!cfg.client_id || !cfg.redirect_uri || !cfg.hydra_browser_url) {
     showError("Client ID, Redirect URI, and Hydra Browser URL are required");
@@ -138,6 +145,7 @@ function toggleConfig() {
     document.getElementById("client_secret").value = cfg.client_secret || "";
     document.getElementById("redirect_uri").value = cfg.redirect_uri || "";
     document.getElementById("hydra_browser_url").value = cfg.hydra_browser_url || "";
+    document.getElementById("hydra_server_url").value = cfg.hydra_server_url || "";
   }
 }
 
@@ -156,6 +164,7 @@ function getFormFields() {
     client_secret: document.getElementById("client_secret").value.trim(),
     redirect_uri: document.getElementById("redirect_uri").value.trim(),
     hydra_browser_url: document.getElementById("hydra_browser_url").value.trim(),
+    hydra_server_url: document.getElementById("hydra_server_url").value.trim(),
   };
 }
 

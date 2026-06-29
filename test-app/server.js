@@ -45,11 +45,14 @@ app.get("/login", (req, res) => {
     return res.redirect("/?error=" + encodeURIComponent("Client ID, Redirect URI, and Hydra Browser URL are required"));
   }
 
+  const hydraServerUrl = req.query.hydra_server_url;
+
   req.session.oauthConfig = {
     client_id: clientId,
     client_secret: req.query.client_secret || "",
     redirect_uri: redirectUri,
     hydra_browser_url: hydraBrowserUrl,
+    hydra_server_url: hydraServerUrl || "",
   };
 
   const codeVerifier = base64URLEncode(crypto.randomBytes(32));
@@ -113,7 +116,8 @@ app.get("/callback", async (req, res) => {
       headers["Authorization"] = `Basic ${basic}`;
     }
 
-    const tokenResponse = await fetch(`${cfg.hydra_browser_url}/oauth2/token`, {
+    const hydraTokenUrl = cfg.hydra_server_url || cfg.hydra_browser_url;
+    const tokenResponse = await fetch(`${hydraTokenUrl}/oauth2/token`, {
       method: "POST",
       headers,
       body,
