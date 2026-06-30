@@ -34,5 +34,7 @@ export default async function RecoveryPage(props: OryPageParams) {
     return null;
   }
 
-  return <Recovery flow={flow} config={{ ...config, intl: { locale } }} components={recoveryOverrides} />;
+  return (
+    <Recovery flow={flow} config={{ ...config, intl: { locale } }} components={recoveryOverrides} />
+  );
 }

@@ -50,10 +50,7 @@ export async function proxyAdminRequest(
   if (!isOwner) {
     const hasPerm = await hasPermission(identityId, permission);
     if (!hasPerm) {
-      return NextResponse.json(
-        { error: "forbidden: insufficient permissions" },
-        { status: 403 },
-      );
+      return NextResponse.json({ error: "forbidden: insufficient permissions" }, { status: 403 });
     }
   }
 
@@ -96,10 +93,9 @@ export async function proxyAdminRequest(
 
 export async function getSessionOwner(sessionId: string): Promise<string | null> {
   try {
-    const res = await fetch(
-      `${KRATOS_ADMIN_URL}/admin/sessions/${sessionId}?expand=identity`,
-      { headers: { accept: "application/json" } },
-    );
+    const res = await fetch(`${KRATOS_ADMIN_URL}/admin/sessions/${sessionId}?expand=identity`, {
+      headers: { accept: "application/json" },
+    });
     if (!res.ok) return null;
     const data = await res.json();
     return data.identity?.id ?? null;

@@ -3,5 +3,9 @@ import { proxyAdminRequest, KRATOS_ADMIN_URL } from "@/src/shared/lib/admin-prox
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  return proxyAdminRequest(_request, "admin:messages.*", `${KRATOS_ADMIN_URL}/admin/courier/messages/${id}`);
+  return proxyAdminRequest(
+    _request,
+    "admin:messages.*",
+    `${KRATOS_ADMIN_URL}/admin/courier/messages/${id}`,
+  );
 }

@@ -59,7 +59,15 @@ export default function LandingPage() {
           aria-label="Toggle theme"
           className="size-9 rounded-full text-muted-foreground hover:bg-accent hover:text-foreground"
         >
-          {mounted ? (theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />) : <div className="size-4" />}
+          {mounted ? (
+            theme === "dark" ? (
+              <Sun className="size-4" />
+            ) : (
+              <Moon className="size-4" />
+            )
+          ) : (
+            <div className="size-4" />
+          )}
         </Button>
       </div>
 

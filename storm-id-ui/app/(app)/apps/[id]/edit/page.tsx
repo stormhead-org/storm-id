@@ -1,3 +1,3 @@
-import EditClientPage from "@/src/pages/clients/[id]/edit/page";
+import EditClientPage from "@/src/pages/apps/[id]/edit/page";
 
 export default EditClientPage;

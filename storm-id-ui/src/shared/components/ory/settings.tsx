@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import type {
   OryCardSettingsSectionProps,
@@ -10,8 +10,8 @@ import type {
   OrySettingsSsoProps,
   OrySettingsTotpProps,
   OrySettingsWebauthnProps,
-} from "@ory/elements-react"
-import { Node, useComponents } from "@ory/elements-react"
+} from "@ory/elements-react";
+import { Node, useComponents } from "@ory/elements-react";
 import {
   Card,
   CardHeader,
@@ -19,32 +19,23 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/src/shared/components/ui/card"
-import { Button } from "@/src/shared/components/ui/button"
-import { Separator } from "@/src/shared/components/ui/separator"
-import { useTranslations } from "@/src/shared/lib/i18n"
-import { baseOverrides } from "./base"
+} from "@/src/shared/components/ui/card";
+import { Button } from "@/src/shared/components/ui/button";
+import { Separator } from "@/src/shared/components/ui/separator";
+import { useTranslations } from "@/src/shared/lib/i18n";
+import { baseOverrides } from "./base";
 
-function SettingsSection({
-  children,
-  action,
-  method,
-  onSubmit,
-}: OryCardSettingsSectionProps) {
+function SettingsSection({ children, action, method, onSubmit }: OryCardSettingsSectionProps) {
   return (
     <Card className="mb-6 w-full">
       <form action={action} method={method} onSubmit={onSubmit}>
         {children}
       </form>
     </Card>
-  )
+  );
 }
 
-function SettingsSectionContent({
-  title,
-  description,
-  children,
-}: OryFormSectionContentProps) {
+function SettingsSectionContent({ title, description, children }: OryFormSectionContentProps) {
   return (
     <>
       {title && (
@@ -53,11 +44,9 @@ function SettingsSectionContent({
           {description && <CardDescription>{description}</CardDescription>}
         </CardHeader>
       )}
-      <CardContent className="flex flex-col gap-4 p-(--card-spacing)">
-        {children}
-      </CardContent>
+      <CardContent className="flex flex-col gap-4 p-(--card-spacing)">{children}</CardContent>
     </>
-  )
+  );
 }
 
 function SettingsSectionFooter({ children, text }: OryFormSectionFooterProps) {
@@ -66,7 +55,7 @@ function SettingsSectionFooter({ children, text }: OryFormSectionFooterProps) {
       {text && <p className="text-sm text-muted-foreground">{text}</p>}
       <div className="ml-auto flex items-center gap-2">{children}</div>
     </CardFooter>
-  )
+  );
 }
 
 function TotpSettingsSection({
@@ -77,19 +66,15 @@ function TotpSettingsSection({
   onUnlink,
   isSubmitting,
 }: OrySettingsTotpProps) {
-  const t = useTranslations()
+  const t = useTranslations();
   if (totpUnlink) {
     return (
       <div className="space-y-4">
         <Separator />
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="text-sm font-medium">
-              {t("settings.totp.enabledLabel")}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              {t("settings.totp.enabledDesc")}
-            </p>
+            <p className="text-sm font-medium">{t("settings.totp.enabledLabel")}</p>
+            <p className="text-sm text-muted-foreground">{t("settings.totp.enabledDesc")}</p>
           </div>
           <Button
             variant="destructive"
@@ -103,7 +88,7 @@ function TotpSettingsSection({
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
   if (totpImage && totpSecret && totpInput) {
@@ -119,10 +104,10 @@ function TotpSettingsSection({
           <Node node={totpInput} />
         </div>
       </div>
-    )
+    );
   }
 
-  return null
+  return null;
 }
 
 function RecoveryCodesSection({
@@ -150,7 +135,7 @@ function RecoveryCodesSection({
           {regenerateButton && <Node node={regenerateButton} />}
         </div>
       </div>
-    )
+    );
   }
 
   if (revealButton || regenerateButton) {
@@ -159,21 +144,17 @@ function RecoveryCodesSection({
         {revealButton && <Node node={revealButton} />}
         {regenerateButton && <Node node={regenerateButton} />}
       </div>
-    )
+    );
   }
 
-  return null
+  return null;
 }
 
-function SsoSettingsSection({
-  linkButtons,
-  unlinkButtons,
-  isSubmitting,
-}: OrySettingsSsoProps) {
-  const t = useTranslations()
+function SsoSettingsSection({ linkButtons, unlinkButtons, isSubmitting }: OrySettingsSsoProps) {
+  const t = useTranslations();
   const {
     Node: { SsoButton: OrySsoButton },
-  } = useComponents()
+  } = useComponents();
 
   return (
     <div className="flex flex-col gap-4">
@@ -201,8 +182,7 @@ function SsoSettingsSection({
                 className="flex items-center justify-between rounded-lg border p-3"
               >
                 <span className="text-sm font-medium">
-                  {button.meta?.label?.text ??
-                    String(button.attributes.value).split("-")[0]}
+                  {button.meta?.label?.text ?? String(button.attributes.value).split("-")[0]}
                 </span>
                 <Button
                   variant="outline"
@@ -220,7 +200,7 @@ function SsoSettingsSection({
         </>
       )}
     </div>
-  )
+  );
 }
 
 function WebauthnSettingsSection({
@@ -229,7 +209,7 @@ function WebauthnSettingsSection({
   removeButtons,
   isSubmitting,
 }: OrySettingsWebauthnProps) {
-  const t = useTranslations()
+  const t = useTranslations();
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-2">
@@ -247,9 +227,7 @@ function WebauthnSettingsSection({
                 key={button.attributes.value}
                 className="flex items-center justify-between rounded-lg border p-3"
               >
-                <span className="text-sm">
-                  {button.meta?.label?.text ?? "Passkey"}
-                </span>
+                <span className="text-sm">{button.meta?.label?.text ?? "Passkey"}</span>
                 <Button
                   variant="outline"
                   size="lg"
@@ -266,7 +244,7 @@ function WebauthnSettingsSection({
         </>
       )}
     </div>
-  )
+  );
 }
 
 function PasskeySettingsSection({
@@ -274,7 +252,7 @@ function PasskeySettingsSection({
   removeButtons,
   isSubmitting,
 }: OrySettingsPasskeyProps) {
-  const t = useTranslations()
+  const t = useTranslations();
   return (
     <div className="space-y-4">
       <Node node={triggerButton} />
@@ -287,9 +265,7 @@ function PasskeySettingsSection({
                 key={button.attributes.value}
                 className="flex items-center justify-between rounded-lg border p-3"
               >
-                <span className="text-sm">
-                  {button.meta?.label?.text ?? "Passkey"}
-                </span>
+                <span className="text-sm">{button.meta?.label?.text ?? "Passkey"}</span>
                 <Button
                   variant="outline"
                   size="lg"
@@ -306,7 +282,7 @@ function PasskeySettingsSection({
         </>
       )}
     </div>
-  )
+  );
 }
 
 export const settingsOverrides: OryFlowComponentOverrides = {
@@ -325,4 +301,4 @@ export const settingsOverrides: OryFlowComponentOverrides = {
     PasskeySettings: PasskeySettingsSection,
     RecoveryCodesSettings: RecoveryCodesSection,
   },
-}
+};

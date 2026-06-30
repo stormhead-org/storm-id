@@ -31,7 +31,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (identityId) {
     const roleIds = await getUserRoles(identityId);
     const perms = await getRolePermissions(roleIds);
-    const hasAdminAccess = perms.some(p => p === "*" || p.startsWith("admin:"));
+    const hasAdminAccess = perms.some((p) => p === "*" || p.startsWith("admin:"));
     if (!hasAdminAccess) {
       redirect("/welcome");
     }

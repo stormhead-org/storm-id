@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "@/src/shared/lib/i18n";
-import { ClientsList } from "@/src/widgets/clients/ui/clients-list";
+import { ClientsList } from "@/src/widgets/apps/ui/clients-list";
 
 export default function ClientsPage() {
   const t = useTranslations();

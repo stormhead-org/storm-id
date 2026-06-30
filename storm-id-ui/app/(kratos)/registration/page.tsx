@@ -34,5 +34,11 @@ export default async function RegistrationPage(props: OryPageParams) {
     return null;
   }
 
-  return <Registration flow={flow} config={{ ...config, intl: { locale } }} components={registrationOverrides} />;
+  return (
+    <Registration
+      flow={flow}
+      config={{ ...config, intl: { locale } }}
+      components={registrationOverrides}
+    />
+  );
 }

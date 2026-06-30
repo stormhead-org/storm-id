@@ -1,3 +1,3 @@
-import ClientDetailPage from "@/src/pages/clients/[id]/page";
+import ClientDetailPage from "@/src/pages/apps/[id]/page";
 
 export default ClientDetailPage;

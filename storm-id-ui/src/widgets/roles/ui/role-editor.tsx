@@ -407,7 +407,11 @@ export function RoleEditor({ onBack, initialRoleId }: RoleEditorProps) {
                   role={selectedRole}
                   isEveryone={isEveryoneRole}
                   isOwner={isOwnerRole}
-                  readOnly={!canManage || (selectedRole.position >= maxPosition && !isSuperAdmin) || (selectedRole.is_default && !canEditDefault)}
+                  readOnly={
+                    !canManage ||
+                    (selectedRole.position >= maxPosition && !isSuperAdmin) ||
+                    (selectedRole.is_default && !canEditDefault)
+                  }
                   onSave={handleUpdateRole}
                 />
               )}
@@ -416,7 +420,11 @@ export function RoleEditor({ onBack, initialRoleId }: RoleEditorProps) {
                 <RolePermissionsEditor
                   role={selectedRole}
                   userPermissions={permissions}
-                  readOnly={!canManage || (selectedRole.position >= maxPosition && !isSuperAdmin) || (selectedRole.is_default && !canEditDefault)}
+                  readOnly={
+                    !canManage ||
+                    (selectedRole.position >= maxPosition && !isSuperAdmin) ||
+                    (selectedRole.is_default && !canEditDefault)
+                  }
                   onSave={async (newPerms) => {
                     await handleUpdateRole({ permissions: newPerms });
                   }}
@@ -434,7 +442,11 @@ export function RoleEditor({ onBack, initialRoleId }: RoleEditorProps) {
                   role={selectedRole}
                   identities={identities || []}
                   assignedUserIds={assignedUserIds}
-                  readOnly={!canManage || (selectedRole.position >= maxPosition && !isSuperAdmin) || (selectedRole.is_default && !canEditDefault)}
+                  readOnly={
+                    !canManage ||
+                    (selectedRole.position >= maxPosition && !isSuperAdmin) ||
+                    (selectedRole.is_default && !canEditDefault)
+                  }
                   onAssign={async (userIds) => {
                     try {
                       for (const userId of userIds) {

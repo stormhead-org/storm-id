@@ -1,3 +1,3 @@
-import ClientsPage from "@/src/pages/clients/page";
+import ClientsPage from "@/src/pages/apps/page";
 
 export default ClientsPage;

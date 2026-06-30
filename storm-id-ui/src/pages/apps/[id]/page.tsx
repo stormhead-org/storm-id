@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { ClientDetail } from "@/src/widgets/clients/ui/client-detail";
+import { ClientDetail } from "@/src/widgets/apps/ui/client-detail";
 
 export default function ClientDetailPage() {
   const params = useParams();

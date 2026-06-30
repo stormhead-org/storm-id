@@ -1,3 +1,3 @@
-import CreateClientPage from "@/src/pages/clients/create/page";
+import CreateClientPage from "@/src/pages/apps/create/page";
 
 export default CreateClientPage;

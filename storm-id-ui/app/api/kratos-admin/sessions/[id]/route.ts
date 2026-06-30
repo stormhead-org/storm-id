@@ -14,10 +14,18 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
   }
   const owner = await getSessionOwner(id);
   const opts = owner === identityId ? { bypassOwnerId: owner } : undefined;
-  return proxyAdminRequest(_request, "admin:sessions.view", `${KRATOS_ADMIN_URL}/admin/sessions/${id}`, opts);
+  return proxyAdminRequest(
+    _request,
+    "admin:sessions.view",
+    `${KRATOS_ADMIN_URL}/admin/sessions/${id}`,
+    opts,
+  );
 }
 
-export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   const { id } = await params;
   const identityId = await getIdentityId(_request);
   if (!identityId) {
@@ -25,5 +33,10 @@ export async function DELETE(_request: NextRequest, { params }: { params: Promis
   }
   const owner = await getSessionOwner(id);
   const opts = owner === identityId ? { bypassOwnerId: owner } : undefined;
-  return proxyAdminRequest(_request, "admin:sessions.revoke", `${KRATOS_ADMIN_URL}/admin/sessions/${id}`, opts);
+  return proxyAdminRequest(
+    _request,
+    "admin:sessions.revoke",
+    `${KRATOS_ADMIN_URL}/admin/sessions/${id}`,
+    opts,
+  );
 }

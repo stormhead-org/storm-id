@@ -34,5 +34,11 @@ export default async function VerificationPage(props: OryPageParams) {
     return null;
   }
 
-  return <Verification flow={flow} config={{ ...config, intl: { locale } }} components={verificationOverrides} />;
+  return (
+    <Verification
+      flow={flow}
+      config={{ ...config, intl: { locale } }}
+      components={verificationOverrides}
+    />
+  );
 }
