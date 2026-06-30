@@ -57,6 +57,7 @@ export default function EditClientPage() {
     response_types: string[];
     scope: string;
     is_public: boolean;
+    is_stormic?: boolean;
   }) => {
     await updateMutation.mutateAsync({
       id: clientId,
@@ -67,6 +68,7 @@ export default function EditClientPage() {
         response_types: data.response_types,
         scope: data.scope || undefined,
         token_endpoint_auth_method: data.is_public ? "none" : "client_secret_basic",
+        is_stormic: data.is_stormic,
       },
     });
     router.push(`/apps/${clientId}`);
