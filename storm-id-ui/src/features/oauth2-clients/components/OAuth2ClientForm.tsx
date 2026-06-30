@@ -64,7 +64,8 @@ export function OAuth2ClientForm({
   const [scope, setScope] = useState(initialData?.scope || "openid profile email");
   const [isPublic, setIsPublic] = useState(initialData?.token_endpoint_auth_method === "none");
   const [isStormic, setIsStormic] = useState(
-    !!initialData?.metadata && (initialData.metadata as Record<string, unknown>).is_stormic === true,
+    !!initialData?.metadata &&
+      (initialData.metadata as Record<string, unknown>).is_stormic === true,
   );
   const [redirectUriError, setRedirectUriError] = useState(false);
 
@@ -177,9 +178,9 @@ export function OAuth2ClientForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-8">
+      <div className="grid gap-6 md:grid-cols-[2fr_1fr]">
+        <div className="space-y-8">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -187,7 +188,7 @@ export function OAuth2ClientForm({
                 {t("clients.form.basicInfo")}
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="name">{t("clients.form.appName")}</Label>
                 <Input
@@ -217,7 +218,7 @@ export function OAuth2ClientForm({
                 {t("clients.form.redirectUris")}
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-4">
               <div className="flex gap-2">
                 <Input
                   value={newUri}
@@ -252,7 +253,7 @@ export function OAuth2ClientForm({
           </Card>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -260,7 +261,7 @@ export function OAuth2ClientForm({
                 {t("clients.form.oauth2Config")}
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-5">
               <div className="space-y-2">
                 <Label>{t("clients.form.grantTypes")}</Label>
                 <div className="flex flex-wrap gap-2">
@@ -308,7 +309,7 @@ export function OAuth2ClientForm({
         </div>
       </div>
 
-      <div className="flex gap-2 justify-end">
+      <div className="flex gap-3 justify-end">
         <Button type="button" variant="outline" onClick={() => window.history.back()}>
           {t("clients.form.cancel")}
         </Button>
