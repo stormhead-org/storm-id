@@ -20,6 +20,9 @@ Thumbs.db
 # Docker
 postgres-data/
 
+# Embedded repos (Ory Hydra source)
+hydra/
+
 # Node
 node_modules/
 .next/
