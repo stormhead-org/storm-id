@@ -27,7 +27,7 @@ interface NavItem {
 const userNavItems: NavItem[] = [
   { titleKey: "sidebar.overview", path: "/welcome", icon: <LayoutDashboard /> },
   { titleKey: "sidebar.sessionInfo", path: "/sessions", icon: <Fingerprint /> },
-  { titleKey: "sidebar.myApplications", path: "/clients", icon: <KeyRound /> },
+  { titleKey: "sidebar.myApplications", path: "/apps", icon: <KeyRound /> },
   { titleKey: "sidebar.profile", path: "/profile", icon: <UserCircle /> },
 ];
 

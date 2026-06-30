@@ -38,6 +38,7 @@ export default function CreateClientPage() {
     response_types: string[];
     scope: string;
     is_public: boolean;
+    is_stormic?: boolean;
   }) => {
     const result = await createMutation.mutateAsync({
       client_name: data.client_name || undefined,
@@ -47,6 +48,7 @@ export default function CreateClientPage() {
       scope: data.scope || undefined,
       token_endpoint_auth_method: data.is_public ? "none" : "client_secret_basic",
       owner: profile?.identityId,
+      is_stormic: data.is_stormic,
     });
     setCreatedClient(result);
   };

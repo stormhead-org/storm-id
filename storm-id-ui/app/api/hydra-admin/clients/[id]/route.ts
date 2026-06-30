@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { Configuration, FrontendApi } from "@ory/client-fetch";
 import { requirePermission } from "@/src/shared/lib/permissions";
+import { query } from "@/src/shared/lib/db";
 
 const HYDRA_ADMIN_URL = (process.env.HYDRA_ADMIN_URL || "http://hydra:4445") + "/admin";
 const KRATOS_PUBLIC_URL = process.env.KRATOS_PUBLIC_URL || "http://kratos:4433";
@@ -57,7 +58,10 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
   }
 }
 
-export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   const { id: clientId } = await params;
   const identityId = await getIdentityId(_request);
   if (!identityId) {
@@ -68,6 +72,12 @@ export async function DELETE(_request: NextRequest, { params }: { params: Promis
   if (!isOwnClient) {
     const perm = await requirePermission(_request, "admin:clients.manage");
     if (!perm.allowed) return perm.response;
+  }
+
+  try {
+    await query("DELETE FROM stormic_instances WHERE client_id = $1", [clientId]);
+  } catch {
+    console.error("Failed to clean up stormic instance");
   }
 
   try {

@@ -35,6 +35,7 @@ interface CreateClientInput {
   subject_type?: string;
   metadata?: Record<string, unknown>;
   owner?: string;
+  is_stormic?: boolean;
 }
 
 export function useAllOAuth2Clients(owner?: string, opts?: { enabled?: boolean }) {

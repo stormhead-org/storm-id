@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/src/shared/component
 import { Switch } from "@/src/shared/components/ui/switch";
 import { Badge } from "@/src/shared/components/ui/badge";
 import { useTranslations } from "@/src/shared/lib/i18n";
-import { X, Plus, Loader2, CheckCircle, Copy } from "lucide-react";
+import { X, Plus, Loader2, CheckCircle, Copy, Shield, Globe, Settings2 } from "lucide-react";
 import { useCopyToClipboard } from "@/src/shared/hooks/useCopyToClipboard";
 import type { OAuth2Client } from "../hooks/useOAuth2Clients";
 
@@ -19,6 +19,7 @@ interface FormState {
   response_types: string[];
   scope: string;
   is_public: boolean;
+  is_stormic: boolean;
 }
 
 interface OAuth2ClientFormProps {
@@ -62,6 +63,9 @@ export function OAuth2ClientForm({
   const [responseTypes, setResponseTypes] = useState<string[]>(["code"]);
   const [scope, setScope] = useState(initialData?.scope || "openid profile email");
   const [isPublic, setIsPublic] = useState(initialData?.token_endpoint_auth_method === "none");
+  const [isStormic, setIsStormic] = useState(
+    !!initialData?.metadata && (initialData.metadata as Record<string, unknown>).is_stormic === true,
+  );
   const [redirectUriError, setRedirectUriError] = useState(false);
 
   if (createdClient) {
@@ -126,12 +130,10 @@ export function OAuth2ClientForm({
             </div>
 
             <div className="flex gap-2 pt-2">
-              <Button
-                onClick={() => (window.location.href = `/clients/${createdClient.client_id}`)}
-              >
+              <Button onClick={() => (window.location.href = `/apps/${createdClient.client_id}`)}>
                 {t("clients.form.viewApp")}
               </Button>
-              <Button variant="outline" onClick={() => (window.location.href = "/clients")}>
+              <Button variant="outline" onClick={() => (window.location.href = "/apps")}>
                 {t("clients.form.backToApps")}
               </Button>
             </div>
@@ -155,6 +157,7 @@ export function OAuth2ClientForm({
       response_types: responseTypes,
       scope,
       is_public: isPublic,
+      is_stormic: isStormic,
     });
   };
 
@@ -175,116 +178,135 @@ export function OAuth2ClientForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>{t("clients.form.basicInfo")}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">{t("clients.form.appName")}</Label>
-            <Input
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder={t("clients.form.appNamePlaceholder")}
-            />
-          </div>
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="size-5 text-primary" />
+                {t("clients.form.basicInfo")}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">{t("clients.form.appName")}</Label>
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={t("clients.form.appNamePlaceholder")}
+                />
+              </div>
 
-          <div className="flex items-center gap-3">
-            <Switch id="is_public" checked={isPublic} onCheckedChange={setIsPublic} />
-            <Label htmlFor="is_public">{t("clients.form.publicHint")}</Label>
-          </div>
-        </CardContent>
-      </Card>
+              <div className="flex items-center gap-3">
+                <Switch id="is_public" checked={isPublic} onCheckedChange={setIsPublic} />
+                <Label htmlFor="is_public">{t("clients.form.publicHint")}</Label>
+              </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{t("clients.form.redirectUris")}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <div className="flex gap-2">
-            <Input
-              value={newUri}
-              onChange={(e) => setNewUri(e.target.value)}
-              placeholder={t("clients.form.redirectUriPlaceholder")}
-              onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addRedirectUri())}
-            />
-            <Button type="button" variant="outline" onClick={addRedirectUri}>
-              <Plus className="size-4" />
-            </Button>
-          </div>
-          {redirectUris.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {redirectUris.map((uri) => (
-                <Badge key={uri} variant="secondary" className="gap-1">
-                  {uri}
-                  <button
-                    type="button"
-                    onClick={() => setRedirectUris(redirectUris.filter((u) => u !== uri))}
-                    className="hover:text-destructive"
-                  >
-                    <X className="size-3" />
-                  </button>
-                </Badge>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+              <div className="flex items-center gap-3 pt-1">
+                <Switch id="is_stormic" checked={isStormic} onCheckedChange={setIsStormic} />
+                <Label htmlFor="is_stormic">{t("clients.form.isStormic")}</Label>
+              </div>
+            </CardContent>
+          </Card>
 
-      {redirectUriError && (
-        <p className="text-sm text-destructive">At least one Redirect URI is required.</p>
-      )}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Globe className="size-5 text-primary" />
+                {t("clients.form.redirectUris")}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex gap-2">
+                <Input
+                  value={newUri}
+                  onChange={(e) => setNewUri(e.target.value)}
+                  placeholder={t("clients.form.redirectUriPlaceholder")}
+                  onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addRedirectUri())}
+                />
+                <Button type="button" variant="outline" onClick={addRedirectUri}>
+                  <Plus className="size-4" />
+                </Button>
+              </div>
+              {redirectUris.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {redirectUris.map((uri) => (
+                    <Badge key={uri} variant="secondary" className="gap-1">
+                      {uri}
+                      <button
+                        type="button"
+                        onClick={() => setRedirectUris(redirectUris.filter((u) => u !== uri))}
+                        className="hover:text-destructive"
+                      >
+                        <X className="size-3" />
+                      </button>
+                    </Badge>
+                  ))}
+                </div>
+              )}
+              {redirectUriError && (
+                <p className="text-sm text-destructive">At least one Redirect URI is required.</p>
+              )}
+            </CardContent>
+          </Card>
+        </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{t("clients.form.oauth2Config")}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label>{t("clients.form.grantTypes")}</Label>
-            <div className="flex flex-wrap gap-2">
-              {GRANT_TYPE_OPTIONS.map((gt) => (
-                <Badge
-                  key={gt}
-                  variant={grantTypes.includes(gt) ? "default" : "outline"}
-                  className="cursor-pointer"
-                  onClick={() => toggleGrantType(gt)}
-                >
-                  {gt}
-                </Badge>
-              ))}
-            </div>
-          </div>
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Settings2 className="size-5 text-primary" />
+                {t("clients.form.oauth2Config")}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label>{t("clients.form.grantTypes")}</Label>
+                <div className="flex flex-wrap gap-2">
+                  {GRANT_TYPE_OPTIONS.map((gt) => (
+                    <Badge
+                      key={gt}
+                      variant={grantTypes.includes(gt) ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() => toggleGrantType(gt)}
+                    >
+                      {gt}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
 
-          <div className="space-y-2">
-            <Label>{t("clients.form.responseTypes")}</Label>
-            <div className="flex flex-wrap gap-2">
-              {RESPONSE_TYPE_OPTIONS.map((rt) => (
-                <Badge
-                  key={rt}
-                  variant={responseTypes.includes(rt) ? "default" : "outline"}
-                  className="cursor-pointer"
-                  onClick={() => toggleResponseType(rt)}
-                >
-                  {rt}
-                </Badge>
-              ))}
-            </div>
-          </div>
+              <div className="space-y-2">
+                <Label>{t("clients.form.responseTypes")}</Label>
+                <div className="flex flex-wrap gap-2">
+                  {RESPONSE_TYPE_OPTIONS.map((rt) => (
+                    <Badge
+                      key={rt}
+                      variant={responseTypes.includes(rt) ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() => toggleResponseType(rt)}
+                    >
+                      {rt}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="scope">{t("clients.form.scopes")}</Label>
-            <Input
-              id="scope"
-              value={scope}
-              onChange={(e) => setScope(e.target.value)}
-              placeholder={t("clients.form.scopesPlaceholder")}
-            />
-            <p className="text-xs text-muted-foreground">{t("clients.form.scopesHint")}</p>
-          </div>
-        </CardContent>
-      </Card>
+              <div className="space-y-2">
+                <Label htmlFor="scope">{t("clients.form.scopes")}</Label>
+                <Input
+                  id="scope"
+                  value={scope}
+                  onChange={(e) => setScope(e.target.value)}
+                  placeholder={t("clients.form.scopesPlaceholder")}
+                />
+                <p className="text-xs text-muted-foreground">{t("clients.form.scopesHint")}</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
 
       <div className="flex gap-2 justify-end">
         <Button type="button" variant="outline" onClick={() => window.history.back()}>

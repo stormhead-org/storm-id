@@ -31,7 +31,7 @@ export function WelcomeContent() {
     {
       title: t("welcome.myApplications"),
       description: t("welcome.myApplicationsDesc"),
-      path: "/clients",
+      path: "/apps",
       icon: <KeyRound className="size-6" />,
     },
     {

@@ -49,6 +49,14 @@ export async function ensureSchema() {
   await queryRaw(`ALTER TABLE roles ADD COLUMN IF NOT EXISTS position INTEGER NOT NULL DEFAULT 0`);
   await queryRaw(`ALTER TABLE roles ADD COLUMN IF NOT EXISTS color VARCHAR(7) DEFAULT '#99AAB5'`);
 
+  await queryRaw(`
+    CREATE TABLE IF NOT EXISTS stormic_instances (
+      client_id VARCHAR(255) PRIMARY KEY,
+      owner_id VARCHAR(64) NOT NULL,
+      registered_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `);
+
   const existing = await queryRaw(`SELECT COUNT(*) as count FROM roles`);
   if (parseInt(existing.rows[0].count, 10) === 0) {
     const ownerId = randomUUID();

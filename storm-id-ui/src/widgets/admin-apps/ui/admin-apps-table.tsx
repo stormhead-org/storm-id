@@ -57,6 +57,9 @@ export function AdminAppsTable() {
   const total = clients?.length ?? 0;
   const publicCount = clients?.filter((c) => c.token_endpoint_auth_method === "none").length ?? 0;
   const confidentialCount = total - publicCount;
+  const stormicCount =
+    clients?.filter((c) => (c.metadata as Record<string, unknown> | undefined)?.is_stormic === true)
+      .length ?? 0;
 
   const handleDelete = async () => {
     if (!clientToDelete) return;
@@ -92,7 +95,7 @@ export function AdminAppsTable() {
 
   return (
     <div>
-      <div className="grid gap-4 sm:grid-cols-3 mb-6">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
         <Card>
           <CardContent className="p-4 flex items-center gap-3">
             <Server className="size-5 text-primary" />
@@ -126,6 +129,15 @@ export function AdminAppsTable() {
             </div>
           </CardContent>
         </Card>
+        <Card>
+          <CardContent className="p-4 flex items-center gap-3">
+            <Server className="size-5 text-primary" />
+            <div>
+              <p className="text-2xl font-bold">{stormicCount}</p>
+              <p className="text-xs text-muted-foreground">{t("clients.list.stormic")}</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <div className="flex items-center justify-between mb-4 gap-4">
@@ -139,7 +151,7 @@ export function AdminAppsTable() {
           />
         </div>
         {canCreate && (
-          <Button onClick={() => router.push("/clients/create")}>
+          <Button onClick={() => router.push("/apps/create")}>
             <Plus className="size-4 mr-1" />
             {t("adminApps.table.newApp")}
           </Button>
@@ -172,13 +184,23 @@ export function AdminAppsTable() {
                   {client.client_id.substring(0, 16)}...
                 </TableCell>
                 <TableCell>
-                  <Badge
-                    variant={client.token_endpoint_auth_method === "none" ? "secondary" : "default"}
-                  >
-                    {client.token_endpoint_auth_method === "none"
-                      ? t("adminApps.table.public")
-                      : t("adminApps.table.confidential")}
-                  </Badge>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge
+                      variant={
+                        client.token_endpoint_auth_method === "none" ? "secondary" : "default"
+                      }
+                    >
+                      {client.token_endpoint_auth_method === "none"
+                        ? t("adminApps.table.public")
+                        : t("adminApps.table.confidential")}
+                    </Badge>
+                    {(client.metadata as Record<string, unknown> | undefined)?.is_stormic ===
+                      true && (
+                      <Badge variant="outline" className="border-emerald-500 text-emerald-600">
+                        Stormic
+                      </Badge>
+                    )}
+                  </div>
                 </TableCell>
                 <TableCell className="text-xs text-muted-foreground font-mono">
                   {client.owner ? client.owner.substring(0, 12) + "..." : "—"}
@@ -188,7 +210,7 @@ export function AdminAppsTable() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => router.push(`/clients/${client.client_id}`)}
+                      onClick={() => router.push(`/apps/${client.client_id}`)}
                     >
                       <Eye className="size-4" />
                     </Button>
@@ -197,7 +219,7 @@ export function AdminAppsTable() {
                         <Button
                           variant="ghost"
                           size="icon"
-                          onClick={() => router.push(`/clients/${client.client_id}/edit`)}
+                          onClick={() => router.push(`/apps/${client.client_id}/edit`)}
                         >
                           <Pencil className="size-4" />
                         </Button>

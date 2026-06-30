@@ -101,6 +101,8 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
   const isOwner = client && client.owner && client.owner === profile?.identityId;
   const canManage = isOwner || canAdmin;
   const isPublicClient = client && client.token_endpoint_auth_method === "none";
+  const isStormic =
+    client?.metadata && (client.metadata as Record<string, unknown>).is_stormic === true;
 
   if (isLoading) {
     return <DetailSkeleton sections={5} />;
@@ -124,7 +126,7 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
     try {
       await deleteMutation.mutateAsync(clientId);
       toast.success(t("toasts.success.clientDeleted"));
-      router.push("/clients");
+      router.push("/apps");
     } catch {
       toast.error(t("toasts.error.clientDeleteFailed"));
     }
@@ -153,7 +155,7 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
   return (
     <div className="py-6">
       <div className="flex items-center gap-4 mb-6">
-        <Button variant="ghost" size="icon" onClick={() => router.push("/clients")}>
+        <Button variant="ghost" size="icon" onClick={() => router.push("/apps")}>
           <ArrowLeft className="size-5" />
         </Button>
         <Avatar className="size-10">
@@ -167,7 +169,7 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
         </div>
         {canManage && (
           <div className="flex gap-2">
-            <Button variant="outline" onClick={() => router.push(`/clients/${clientId}/edit`)}>
+            <Button variant="outline" onClick={() => router.push(`/apps/${clientId}/edit`)}>
               <Pencil className="size-4 mr-1" />
               {t("clients.detail.edit")}
             </Button>
@@ -190,13 +192,18 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
                 <p className="text-sm font-medium text-muted-foreground mb-1">
                   {t("clients.detail.type")}
                 </p>
-                <Badge
-                  variant={isPublicClient ? "secondary" : "default"}
-                >
-                  {isPublicClient
-                    ? t("clients.list.typePublic")
-                    : t("clients.list.typeConfidential")}
-                </Badge>
+                <div className="flex flex-wrap gap-1">
+                  <Badge variant={isPublicClient ? "secondary" : "default"}>
+                    {isPublicClient
+                      ? t("clients.list.typePublic")
+                      : t("clients.list.typeConfidential")}
+                  </Badge>
+                  {isStormic && (
+                    <Badge variant="outline" className="border-emerald-500 text-emerald-600">
+                      {t("clients.list.typeStormic")}
+                    </Badge>
+                  )}
+                </div>
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">

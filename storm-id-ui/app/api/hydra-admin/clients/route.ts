@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { Configuration, FrontendApi } from "@ory/client-fetch";
 import { requirePermission } from "@/src/shared/lib/permissions";
+import { query } from "@/src/shared/lib/db";
 
 const HYDRA_ADMIN_URL = (process.env.HYDRA_ADMIN_URL || "http://hydra:4445") + "/admin";
 const KRATOS_PUBLIC_URL = process.env.KRATOS_PUBLIC_URL || "http://kratos:4433";
@@ -68,6 +69,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "invalid JSON" }, { status: 400 });
   }
 
+  const isStormic = Boolean(body.is_stormic);
+  delete body.is_stormic;
+
+  body.metadata = {
+    ...(body.metadata as Record<string, unknown>),
+    is_stormic: isStormic,
+  };
+
   body.owner = identityId;
 
   try {
@@ -77,6 +86,18 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(body),
     });
     const data = await res.json();
+
+    if (res.ok && isStormic && data.client_id) {
+      try {
+        await query(
+          `INSERT INTO stormic_instances (client_id, owner_id) VALUES ($1, $2) ON CONFLICT DO NOTHING`,
+          [data.client_id, identityId],
+        );
+      } catch {
+        console.error("Failed to insert stormic instance");
+      }
+    }
+
     return NextResponse.json(data, { status: res.status });
   } catch (error) {
     return NextResponse.json(

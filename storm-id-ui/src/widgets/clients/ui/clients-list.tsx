@@ -49,6 +49,7 @@ import {
   KeyRound,
   MoreHorizontal,
   ShieldCheck,
+  Server,
 } from "lucide-react";
 
 export function ClientsList() {
@@ -84,6 +85,9 @@ export function ClientsList() {
   const confidentialCount = total - publicCount;
   const authCodeCount =
     clients?.filter((c) => c.grant_types?.includes("authorization_code")).length ?? 0;
+  const stormicCount =
+    clients?.filter((c) => (c.metadata as Record<string, unknown> | undefined)?.is_stormic === true)
+      .length ?? 0;
 
   const handleDelete = async () => {
     if (!clientToDelete) return;
@@ -161,6 +165,15 @@ export function ClientsList() {
             </div>
           </CardContent>
         </Card>
+        <Card>
+          <CardContent className="p-4 flex items-center gap-3">
+            <Server className="size-5 text-primary" />
+            <div>
+              <p className="text-2xl font-bold">{stormicCount}</p>
+              <p className="text-xs text-muted-foreground">{t("clients.list.stormic")}</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <div className="flex items-center justify-between mb-4 gap-4">
@@ -174,7 +187,7 @@ export function ClientsList() {
           />
         </div>
         {canCreate && (
-          <Button onClick={() => router.push("/clients/create")}>
+          <Button onClick={() => router.push("/apps/create")}>
             <Plus className="size-4 mr-1" />
             {t("clients.list.newApp")}
           </Button>
@@ -190,7 +203,7 @@ export function ClientsList() {
               variant="outline"
               size="sm"
               className="mt-2"
-              onClick={() => router.push("/clients/create")}
+              onClick={() => router.push("/apps/create")}
             >
               {t("clients.list.createFirst")}
             </Button>
@@ -214,7 +227,7 @@ export function ClientsList() {
               <TableRow
                 key={client.client_id}
                 className="cursor-pointer"
-                onClick={() => router.push(`/clients/${client.client_id}`)}
+                onClick={() => router.push(`/apps/${client.client_id}`)}
               >
                 <TableCell className="font-medium">
                   {client.client_name || t("clients.list.unnamed")}
@@ -223,13 +236,23 @@ export function ClientsList() {
                   {client.client_id.substring(0, 16)}...
                 </TableCell>
                 <TableCell>
-                  <Badge
-                    variant={client.token_endpoint_auth_method === "none" ? "secondary" : "default"}
-                  >
-                    {client.token_endpoint_auth_method === "none"
-                      ? t("clients.list.typePublic")
-                      : t("clients.list.typeConfidential")}
-                  </Badge>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge
+                      variant={
+                        client.token_endpoint_auth_method === "none" ? "secondary" : "default"
+                      }
+                    >
+                      {client.token_endpoint_auth_method === "none"
+                        ? t("clients.list.typePublic")
+                        : t("clients.list.typeConfidential")}
+                    </Badge>
+                    {(client.metadata as Record<string, unknown> | undefined)?.is_stormic ===
+                      true && (
+                      <Badge variant="outline" className="border-emerald-500 text-emerald-600">
+                        {t("clients.list.typeStormic")}
+                      </Badge>
+                    )}
+                  </div>
                 </TableCell>
                 <TableCell>
                   <div className="flex flex-wrap gap-1">
@@ -258,7 +281,7 @@ export function ClientsList() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => router.push(`/clients/${client.client_id}`)}>
+                      <DropdownMenuItem onClick={() => router.push(`/apps/${client.client_id}`)}>
                         <Eye className="size-4 mr-2" />
                         {t("clients.list.view")}
                       </DropdownMenuItem>
@@ -269,7 +292,7 @@ export function ClientsList() {
                           canManage && (
                             <>
                               <DropdownMenuItem
-                                onClick={() => router.push(`/clients/${client.client_id}/edit`)}
+                                onClick={() => router.push(`/apps/${client.client_id}/edit`)}
                               >
                                 <Pencil className="size-4 mr-2" />
                                 {t("clients.list.edit")}

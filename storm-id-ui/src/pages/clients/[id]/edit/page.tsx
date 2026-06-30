@@ -69,7 +69,7 @@ export default function EditClientPage() {
         token_endpoint_auth_method: data.is_public ? "none" : "client_secret_basic",
       },
     });
-    router.push(`/clients/${clientId}`);
+    router.push(`/apps/${clientId}`);
   };
 
   return (
