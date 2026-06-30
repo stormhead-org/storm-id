@@ -2,22 +2,22 @@ import { type NextRequest, NextResponse } from "next/server";
 import { requirePermission } from "@/src/shared/lib/permissions";
 
 const PERMISSION_CATALOG = [
-  { id: "admin:*", label: "System: Full Access", group: "System" },
-  { id: "admin:dashboard.view", label: "Dashboard: View", group: "Dashboard" },
-  { id: "admin:dashboard.manage", label: "Dashboard: Manage", group: "Dashboard" },
-  { id: "admin:users.view", label: "Users: View", group: "Users" },
-  { id: "admin:users.create", label: "Users: Create", group: "Users" },
-  { id: "admin:users.edit", label: "Users: Edit", group: "Users" },
-  { id: "admin:users.delete", label: "Users: Delete", group: "Users" },
-  { id: "admin:roles.view", label: "Roles: View", group: "Roles" },
-  { id: "admin:roles.manage", label: "Roles: Manage", group: "Roles" },
-  { id: "admin:roles.default.manage", label: "Roles: Manage Default (@everyone)", group: "Roles" },
-  { id: "admin:sessions.view", label: "Sessions: View", group: "Sessions" },
-  { id: "admin:sessions.revoke", label: "Sessions: Revoke", group: "Sessions" },
-  { id: "admin:clients.view", label: "Clients: View", group: "Clients" },
-  { id: "admin:clients.create", label: "Clients: Create", group: "Clients" },
-  { id: "admin:clients.manage", label: "Clients: Manage", group: "Clients" },
-  { id: "admin:messages.*", label: "Messages: All", group: "Messages" },
+  { id: "admin:*", group: "System" },
+  { id: "admin:dashboard.view", group: "Dashboard" },
+  { id: "admin:dashboard.manage", group: "Dashboard" },
+  { id: "admin:users.view", group: "Users" },
+  { id: "admin:users.create", group: "Users" },
+  { id: "admin:users.edit", group: "Users" },
+  { id: "admin:users.delete", group: "Users" },
+  { id: "admin:roles.view", group: "Roles" },
+  { id: "admin:roles.manage", group: "Roles" },
+  { id: "admin:roles.default.manage", group: "Roles" },
+  { id: "admin:sessions.view", group: "Sessions" },
+  { id: "admin:sessions.revoke", group: "Sessions" },
+  { id: "admin:clients.view", group: "Clients" },
+  { id: "admin:clients.create", group: "Clients" },
+  { id: "admin:clients.manage", group: "Clients" },
+  { id: "admin:messages.*", group: "Messages" },
 ];
 
 export async function GET(request: NextRequest) {

@@ -103,6 +103,35 @@
       "ownerDescription": "Полный доступ ко всем функциям",
       "everyoneDescription": "Стандартные права для всех участников"
     },
+    "permissions": {
+      "groups": {
+        "System": "Система",
+        "Dashboard": "Дашборд",
+        "Users": "Пользователи",
+        "Roles": "Роли",
+        "Sessions": "Сессии",
+        "Clients": "Клиенты",
+        "Messages": "Сообщения"
+      },
+      "items": {
+        "admin_all": "Система: Полный доступ",
+        "admin_dashboard_view": "Дашборд: Просмотр",
+        "admin_dashboard_manage": "Дашборд: Управление",
+        "admin_users_view": "Пользователи: Просмотр",
+        "admin_users_create": "Пользователи: Создание",
+        "admin_users_edit": "Пользователи: Редактирование",
+        "admin_users_delete": "Пользователи: Удаление",
+        "admin_roles_view": "Роли: Просмотр",
+        "admin_roles_manage": "Роли: Управление",
+        "admin_roles_default_manage": "Роли: Управление по умолчанию (@everyone)",
+        "admin_sessions_view": "Сессии: Просмотр",
+        "admin_sessions_revoke": "Сессии: Отзыв",
+        "admin_clients_view": "Клиенты: Просмотр",
+        "admin_clients_create": "Клиенты: Создание",
+        "admin_clients_manage": "Клиенты: Управление",
+        "admin_messages_all": "Сообщения: Все"
+      }
+    },
     "editor": {
       "back": "Назад",
       "editRole": "Редактировать роль — {name}",

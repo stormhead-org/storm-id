@@ -17,7 +17,7 @@ export interface Role {
 
 export interface PermissionGroup {
   group: string;
-  permissions: { id: string; label: string }[];
+  permissions: { id: string }[];
 }
 
 export function useRoles() {

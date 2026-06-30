@@ -12,6 +12,10 @@ import { matchPermission } from "@/src/shared/lib/permission-utils";
 import { cn } from "@/src/shared/lib/utils";
 import type { Role } from "@/src/features/roles/hooks/useRoles";
 
+function permItemKey(id: string): string {
+  return `roles.permissions.items.${id.replace(/[:.*]/g, (c) => (c === "*" ? "all" : "_"))}`;
+}
+
 interface RolePermissionsEditorProps {
   role: Role;
   userPermissions: string[];
@@ -51,11 +55,11 @@ export function RolePermissionsEditor({
         permissions: group.permissions.filter(
           (p) =>
             (isSuperAdmin || matchPermission(userPermissions, p.id)) &&
-            p.label.toLowerCase().includes(searchTerm.toLowerCase()),
+            t(permItemKey(p.id)).toLowerCase().includes(searchTerm.toLowerCase()),
         ),
       }))
       .filter((g) => g.permissions.length > 0);
-  }, [catalog, userPermissions, isSuperAdmin, searchTerm]);
+  }, [catalog, userPermissions, isSuperAdmin, searchTerm, t]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -97,7 +101,7 @@ export function RolePermissionsEditor({
           filteredCatalog.map((group) => (
             <div key={group.group}>
               <div className="flex items-center gap-2 mb-2">
-                <Badge variant="secondary">{group.group}</Badge>
+                <Badge variant="secondary">{t(`roles.permissions.groups.${group.group}`)}</Badge>
               </div>
               <div className="space-y-1">
                 {group.permissions.map((perm) => (
@@ -109,7 +113,7 @@ export function RolePermissionsEditor({
                     )}
                     onClick={() => !readOnly && togglePermission(perm.id)}
                   >
-                    <span className="text-sm font-medium">{perm.label}</span>
+                    <span className="text-sm font-medium">{t(permItemKey(perm.id))}</span>
                     <Switch
                       checked={selectedPerms.includes(perm.id)}
                       onCheckedChange={() => togglePermission(perm.id)}
