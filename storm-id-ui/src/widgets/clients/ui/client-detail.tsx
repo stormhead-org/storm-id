@@ -419,16 +419,23 @@ export function ClientDetail({ clientId }: ClientDetailProps) {
             </div>
           </Section>
 
-          {client.metadata && Object.keys(client.metadata).length > 0 && (
-            <Section
-              title={t("clients.detail.customMetadata")}
-              icon={<Settings2 className="size-5 text-primary" />}
-            >
-              <pre className="text-xs bg-muted p-3 rounded-lg overflow-x-auto">
-                {JSON.stringify(client.metadata, null, 2)}
-              </pre>
-            </Section>
-          )}
+          {(() => {
+            const filteredMetadata = client.metadata
+              ? Object.fromEntries(
+                  Object.entries(client.metadata).filter(([key]) => key !== "is_stormic"),
+                )
+              : null;
+            return filteredMetadata && Object.keys(filteredMetadata).length > 0 ? (
+              <Section
+                title={t("clients.detail.customMetadata")}
+                icon={<Settings2 className="size-5 text-primary" />}
+              >
+                <pre className="text-xs bg-muted p-3 rounded-lg overflow-x-auto">
+                  {JSON.stringify(filteredMetadata, null, 2)}
+                </pre>
+              </Section>
+            ) : null;
+          })()}
         </div>
       </div>
 

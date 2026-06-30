@@ -123,6 +123,14 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     return NextResponse.json({ error: "invalid JSON" }, { status: 400 });
   }
 
+  const isStormic = Boolean(body.is_stormic);
+  delete body.is_stormic;
+
+  body.metadata = {
+    ...(body.metadata as Record<string, unknown>),
+    is_stormic: isStormic,
+  };
+
   try {
     const clientRes = await fetch(`${HYDRA_ADMIN_URL}/clients/${clientId}`, {
       headers: { accept: "application/json" },
@@ -147,6 +155,20 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       body: JSON.stringify(body),
     });
     const data = await res.json();
+
+    if (res.ok) {
+      if (isStormic) {
+        await query(
+          `INSERT INTO stormic_instances (client_id, owner_id) VALUES ($1, $2) ON CONFLICT DO NOTHING`,
+          [clientId, identityId],
+        ).catch(() => {});
+      } else {
+        await query("DELETE FROM stormic_instances WHERE client_id = $1", [clientId]).catch(
+          () => {},
+        );
+      }
+    }
+
     return NextResponse.json(data, { status: res.status });
   } catch (error) {
     return NextResponse.json(
