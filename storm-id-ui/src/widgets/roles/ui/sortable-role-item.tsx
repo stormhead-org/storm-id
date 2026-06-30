@@ -49,7 +49,7 @@ export function SortableRoleItem({
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex w-full p-3 rounded-xl gap-2 border ${
+      className={`flex w-full p-3 rounded-xl gap-2 border items-start ${
         isSelected ? "bg-primary/10 border-primary/30" : "bg-card border-border hover:bg-accent/50"
       } transition-colors`}
     >
@@ -69,32 +69,38 @@ export function SortableRoleItem({
         )}
       </div>
       <div
-        className="flex items-center justify-between w-full cursor-pointer min-w-0 gap-2"
+        className="flex-1 min-w-0 cursor-pointer"
         onClick={onSelect}
       >
-        <div className="flex items-center gap-2 min-w-0">
-          <Shield className="size-5 shrink-0" style={{ color: roleColor }} />
-          <span className="font-medium truncate">{role.name}</span>
-          {role.is_system && (
-            <Badge variant="secondary" className="text-xs shrink-0">
-              {t("roles.badge.system")}
-            </Badge>
-          )}
-          {role.is_default && (
-            <Badge variant="outline" className="text-xs shrink-0">
-              {t("roles.badge.default")}
-            </Badge>
+        <div className="flex items-center justify-between w-full gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <Shield className="size-5 shrink-0" style={{ color: roleColor }} />
+            <span className="font-medium truncate">{role.name}</span>
+          </div>
+          {canDelete && !disabled && (
+            <div
+              className="shrink-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg p-1 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
+            >
+              <Trash2 className="size-4" />
+            </div>
           )}
         </div>
-        {canDelete && !disabled && (
-          <div
-            className="shrink-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg p-1 transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete();
-            }}
-          >
-            <Trash2 className="size-4" />
+        {(role.is_system || role.is_default) && (
+          <div className="flex items-center gap-1 mt-1 ml-7">
+            {role.is_system && (
+              <Badge variant="secondary" className="text-xs shrink-0">
+                {t("roles.badge.system")}
+              </Badge>
+            )}
+            {role.is_default && (
+              <Badge variant="outline" className="text-xs shrink-0">
+                {t("roles.badge.default")}
+              </Badge>
+            )}
           </div>
         )}
       </div>

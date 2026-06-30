@@ -14,9 +14,9 @@ export function LockedRoleCard({ role }: { role: Role }) {
         <Lock className="size-4" />
       </div>
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between mb-1">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-semibold text-muted-foreground truncate">{role.name}</span>
+        <span className="font-semibold text-muted-foreground truncate block">{role.name}</span>
+        {(role.is_system || role.is_default) && (
+          <div className="flex flex-wrap gap-1 mt-1">
             {role.is_system && (
               <Badge variant="secondary" className="text-xs">
                 {t("roles.badge.system")}
@@ -28,8 +28,8 @@ export function LockedRoleCard({ role }: { role: Role }) {
               </Badge>
             )}
           </div>
-        </div>
-        <div className="flex flex-wrap gap-1">
+        )}
+        <div className="flex flex-wrap gap-1 mt-1">
           {role.permissions.map((p) => (
             <Badge key={p} variant="outline" className="text-xs text-muted-foreground">
               {p}

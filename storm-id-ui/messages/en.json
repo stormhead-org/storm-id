@@ -110,7 +110,7 @@
         "Users": "Users",
         "Roles": "Roles",
         "Sessions": "Sessions",
-        "Clients": "Clients",
+        "Clients": "Apps",
         "Messages": "Messages"
       },
       "items": {
@@ -126,9 +126,9 @@
         "admin_roles_default_manage": "Roles: Manage Default (@everyone)",
         "admin_sessions_view": "Sessions: View",
         "admin_sessions_revoke": "Sessions: Revoke",
-        "admin_clients_view": "Clients: View",
-        "admin_clients_create": "Clients: Create",
-        "admin_clients_manage": "Clients: Manage",
+        "admin_clients_view": "Apps: View",
+        "admin_clients_create": "Apps: Create",
+        "admin_clients_manage": "Apps: Manage",
         "admin_messages_all": "Messages: All"
       }
     },

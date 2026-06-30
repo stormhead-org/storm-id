@@ -110,7 +110,7 @@
         "Users": "Пользователи",
         "Roles": "Роли",
         "Sessions": "Сессии",
-        "Clients": "Клиенты",
+        "Clients": "Приложения",
         "Messages": "Сообщения"
       },
       "items": {
@@ -126,9 +126,9 @@
         "admin_roles_default_manage": "Роли: Управление по умолчанию (@everyone)",
         "admin_sessions_view": "Сессии: Просмотр",
         "admin_sessions_revoke": "Сессии: Отзыв",
-        "admin_clients_view": "Клиенты: Просмотр",
-        "admin_clients_create": "Клиенты: Создание",
-        "admin_clients_manage": "Клиенты: Управление",
+        "admin_clients_view": "Приложения: Просмотр",
+        "admin_clients_create": "Приложения: Создание",
+        "admin_clients_manage": "Приложения: Управление",
         "admin_messages_all": "Сообщения: Все"
       }
     },
