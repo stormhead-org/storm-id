@@ -8,7 +8,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/src/shared/component
 import { Switch } from "@/src/shared/components/ui/switch";
 import { Badge } from "@/src/shared/components/ui/badge";
 import { useTranslations } from "@/src/shared/lib/i18n";
-import { X, Plus, Loader2, CheckCircle, Copy, Shield, Globe, Settings2 } from "lucide-react";
+import { X, Plus, Loader2, CheckCircle, Copy, Shield, Globe, Settings2, HelpCircle } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/src/shared/components/ui/tooltip";
 import { useCopyToClipboard } from "@/src/shared/hooks/useCopyToClipboard";
 import type { OAuth2Client } from "../hooks/useOAuth2Clients";
 
@@ -178,6 +184,7 @@ export function OAuth2ClientForm({
   };
 
   return (
+    <TooltipProvider>
     <form onSubmit={handleSubmit} className="space-y-8">
       <div className="grid gap-6 md:grid-cols-[2fr_1fr]">
         <div className="space-y-8">
@@ -206,7 +213,26 @@ export function OAuth2ClientForm({
 
               <div className="flex items-center gap-3 pt-1">
                 <Switch id="is_stormic" checked={isStormic} onCheckedChange={setIsStormic} />
-                <Label htmlFor="is_stormic">{t("clients.form.isStormic")}</Label>
+                <div className="flex items-center gap-1.5 text-sm">
+                  <a
+                    href="https://github.com/stormhead-org/stormic"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium underline-offset-2 hover:underline"
+                  >
+                    Stormic
+                  </a>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span className="inline-flex items-center justify-center size-[18px] rounded-full bg-muted cursor-help">
+                        <HelpCircle className="size-3 text-muted-foreground" />
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="max-w-[220px] bg-muted text-foreground border-muted-foreground/20">
+                      <p className="text-xs">{t("clients.form.isStormicTooltip")}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -319,5 +345,6 @@ export function OAuth2ClientForm({
         </Button>
       </div>
     </form>
+    </TooltipProvider>
   );
 }

@@ -534,7 +534,7 @@
       "appName": "Название приложения",
       "appNamePlaceholder": "Моё приложение",
       "publicHint": "Публичный клиент (PKCE) — client_secret не требуется",
-      "isStormic": "Stormic (самостоятельный хостинг мультиблогов)",
+      "isStormicTooltip": "Включайте только если планируете использовать это приложение в своем экземпляре Stormic",
       "redirectUris": "Redirect URIs",
       "redirectUriPlaceholder": "https://example.com/callback",
       "oauth2Config": "Настройки OAuth2",

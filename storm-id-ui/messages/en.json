@@ -534,7 +534,7 @@
       "appName": "Application Name",
       "appNamePlaceholder": "My App",
       "publicHint": "Public client (PKCE) — no client_secret required",
-      "isStormic": "Stormic (self-hosted multi-blog platform)",
+      "isStormicTooltip": "Enable only when you plan to host this app on your own Stormic instance",
       "redirectUris": "Redirect URIs",
       "redirectUriPlaceholder": "https://example.com/callback",
       "oauth2Config": "OAuth2 Configuration",
